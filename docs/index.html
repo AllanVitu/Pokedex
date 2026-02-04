@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex - 151 Pokémon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Pokédex</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un Pokémon...">
+                <select id="typeFilter" class="type-filter">
+                    <option value="">Tous les types</option>
+                </select>
+            </div>
+        </header>
+
+        <div id="loadingScreen" class="loading-screen">
+            <div class="pokeball-loader"></div>
+            <p>Chargement des Pokémon...</p>
+        </div>
+
+        <main class="pokemon-grid" id="pokemonGrid">
+            <!-- Les cartes Pokémon seront générées ici -->
+        </main>
+
+        <!-- Modal pour les détails -->
+        <div id="pokemonModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <div class="modal-body" id="modalBody">
+                    <!-- Contenu dynamique -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
