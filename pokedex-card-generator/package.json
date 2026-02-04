@@ -1,0 +1,14 @@
+{
+  "name": "pokedex-card-generator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "node scripts/render.js",
+    "render:mobile": "node scripts/render.js --preset mobile",
+    "render:desktop": "node scripts/render.js --preset desktop"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "puppeteer": "^23.0.0"
+  }
+}
