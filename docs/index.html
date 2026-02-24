@@ -38,7 +38,7 @@
             readonly
           />
         </label>
-        <button class="generate-demo" type="button">GENERATE</button>
+        <button class="generate-demo" id="generateDemo" type="button">GENERATE</button>
       </section>
 
       <section class="hub-card stats-card">
@@ -61,7 +61,7 @@
             <strong id="desktopTeam">0</strong>
           </article>
         </div>
-        <p class="view-tag">
+        <p class="view-tag" aria-live="polite">
           Vue active:
           <span id="desktopView">Explorer</span>
         </p>
@@ -143,6 +143,7 @@
       </aside>
     </article>
   </div>
+  <div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
 
   <template id="cardTemplate">
     <article class="poke-card">

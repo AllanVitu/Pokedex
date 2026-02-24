@@ -51,6 +51,8 @@ const allPokemon = [
 
 const DEFAULT_ACCENT = "#87c39f";
 const DEFAULT_GRADIENT = "linear-gradient(150deg, #e8f0f5, #f3ece4 42%, #d9e8df)";
+const STORAGE_KEY = "pokedex_studio_state_v1";
+const TOAST_DURATION = 1800;
 
 let pokedex = [];
 
@@ -88,6 +90,8 @@ const refs = {
   desktopFav: document.querySelector("#desktopFav"),
   desktopTeam: document.querySelector("#desktopTeam"),
   desktopView: document.querySelector("#desktopView"),
+  toastHost: document.querySelector("#toastHost"),
+  generateDemo: document.querySelector("#generateDemo"),
 };
 
 function escapeHtml(value) {
@@ -110,6 +114,70 @@ function darken(hex, amount) {
   const g = clamp(((int >> 8) & 0xff) - amount, 0, 255);
   const b = clamp((int & 0xff) - amount, 0, 255);
   return `rgb(${r}, ${g}, ${b})`;
+}
+
+function persistState() {
+  try {
+    const payload = {
+      query: state.query,
+      type: state.type,
+      view: state.view,
+      favorites: [...state.favorites],
+      team: [...state.team],
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  } catch {
+    // Ignore write failures in restricted contexts.
+  }
+}
+
+function hydrateStateFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      return;
+    }
+
+    const parsed = JSON.parse(raw);
+    if (typeof parsed.query === "string") {
+      state.query = parsed.query;
+    }
+
+    if (typeof parsed.type === "string") {
+      state.type = parsed.type;
+    }
+
+    if (parsed.view === "explore" || parsed.view === "favorites" || parsed.view === "team") {
+      state.view = parsed.view;
+    }
+
+    if (Array.isArray(parsed.favorites)) {
+      state.favorites = new Set(parsed.favorites.map(String));
+    }
+
+    if (Array.isArray(parsed.team)) {
+      state.team = new Set(parsed.team.map(String));
+    }
+  } catch {
+    // Ignore malformed storage payloads.
+  }
+}
+
+function showToast(message) {
+  if (!refs.toastHost) {
+    return;
+  }
+
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+
+  refs.toastHost.append(toast);
+
+  window.setTimeout(() => {
+    toast.classList.add("out");
+    window.setTimeout(() => toast.remove(), 200);
+  }, TOAST_DURATION);
 }
 
 function getUniqueTypes() {
@@ -182,6 +250,12 @@ function updateDesktopStats(listLength) {
   refs.desktopView.textContent = getViewLabel();
 }
 
+function syncNavButtons() {
+  refs.navButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.view === state.view);
+  });
+}
+
 function renderTypeFilters(types) {
   refs.typeFilters.innerHTML = "";
   const fragment = document.createDocumentFragment();
@@ -193,6 +267,7 @@ function renderTypeFilters(types) {
     button.textContent = type;
     button.addEventListener("click", () => {
       state.type = type;
+      persistState();
       render();
     });
     fragment.append(button);
@@ -208,7 +283,7 @@ function isInTeam(id) {
 function toggleTeam(id) {
   if (state.team.has(id)) {
     state.team.delete(id);
-    return;
+    return "removed";
   }
 
   if (state.team.size >= 3) {
@@ -216,6 +291,7 @@ function toggleTeam(id) {
     state.team.delete(first);
   }
   state.team.add(id);
+  return "added";
 }
 
 function createImageFallback(mediaWrap, item) {
@@ -282,27 +358,42 @@ function renderCards(items) {
     });
 
     const favoriteBtn = node.querySelector(".favorite-btn");
-    if (state.favorites.has(item.id)) {
-      favoriteBtn.classList.add("active");
-      favoriteBtn.textContent = "Fav";
-      favoriteBtn.setAttribute("aria-label", "Retirer des favoris");
-    }
+    const isFavorite = state.favorites.has(item.id);
+    favoriteBtn.classList.toggle("active", isFavorite);
+    favoriteBtn.textContent = "Fav";
+    favoriteBtn.setAttribute(
+      "aria-label",
+      isFavorite ? "Retirer des favoris" : "Ajouter aux favoris",
+    );
+    favoriteBtn.setAttribute("aria-pressed", String(isFavorite));
 
     favoriteBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       if (state.favorites.has(item.id)) {
         state.favorites.delete(item.id);
+        showToast(`${item.name} retire des favoris`);
       } else {
         state.favorites.add(item.id);
+        showToast(`${item.name} ajoute aux favoris`);
       }
+      persistState();
       render();
     });
 
     const teamBtn = node.querySelector(".team-btn");
-    teamBtn.textContent = isInTeam(item.id) ? "Retirer Team" : "+ Team";
+    const inTeam = isInTeam(item.id);
+    teamBtn.textContent = inTeam ? "In Team" : "+ Team";
+    teamBtn.setAttribute("aria-pressed", String(inTeam));
+    teamBtn.setAttribute("aria-label", inTeam ? "Retirer de l'equipe" : "Ajouter a l'equipe");
     teamBtn.addEventListener("click", (event) => {
       event.stopPropagation();
-      toggleTeam(item.id);
+      const change = toggleTeam(item.id);
+      showToast(
+        change === "added"
+          ? `${item.name} ajoute a l'equipe`
+          : `${item.name} retire de l'equipe`,
+      );
+      persistState();
       render();
     });
 
@@ -345,9 +436,17 @@ function renderEmptyState(itemsLength) {
 }
 
 function render() {
+  if (refs.searchInput.value !== state.query) {
+    refs.searchInput.value = state.query;
+  }
+
+  syncNavButtons();
+  refs.menuToggle.setAttribute("aria-expanded", String(state.menuOpen));
+
   const types = getUniqueTypes();
   if (!types.includes(state.type)) {
     state.type = "All";
+    persistState();
   }
 
   renderTypeFilters(types);
@@ -369,6 +468,8 @@ function render() {
 function renderDetail(item) {
   refs.detailContent.innerHTML = `
     <h3>${escapeHtml(item.name)} <small>#${escapeHtml(item.id)}</small></h3>
+    <p><strong>${escapeHtml(item.rarity)}</strong> | ${escapeHtml(item.habitat)}</p>
+    <p>${item.types.map((type) => `<span class="tag-chip">${escapeHtml(type)}</span>`).join(" ")}</p>
     <p>${escapeHtml(item.summary)}</p>
     <dl class="stat-grid">
       <div>
@@ -409,14 +510,14 @@ function closeDetail() {
 
 function switchView(nextView) {
   state.view = nextView;
-  refs.navButtons.forEach((button) => {
-    button.classList.toggle("active", button.dataset.view === nextView);
-  });
+  syncNavButtons();
+  persistState();
   render();
 }
 
 function pickRandom() {
   if (pokedex.length === 0) {
+    showToast("Aucune carte disponible");
     return;
   }
 
@@ -424,10 +525,12 @@ function pickRandom() {
   const item = pokedex[index];
   applyAccent(item);
   openDetail(item);
+  showToast(`${item.name} selection aleatoire`);
 }
 
 function autoBuildTeam() {
   if (pokedex.length === 0) {
+    showToast("Aucune carte disponible");
     return;
   }
 
@@ -438,6 +541,8 @@ function autoBuildTeam() {
   }
   const size = Math.min(3, pool.length);
   state.team = new Set(pool.slice(0, size).map((item) => item.id));
+  persistState();
+  showToast("Team auto generee");
   switchView("team");
 }
 
@@ -445,6 +550,8 @@ function resetFilters() {
   state.query = "";
   state.type = "All";
   refs.searchInput.value = "";
+  persistState();
+  showToast("Filtres reinitialises");
   render();
 }
 
@@ -455,6 +562,7 @@ function toggleMenu(forceState) {
     state.menuOpen = !state.menuOpen;
   }
   refs.radialMenu.classList.toggle("open", state.menuOpen);
+  refs.menuToggle.setAttribute("aria-expanded", String(state.menuOpen));
 }
 
 function isEditableTarget(target) {
@@ -472,10 +580,32 @@ function isEditableTarget(target) {
 function setupEvents() {
   refs.searchInput.addEventListener("input", (event) => {
     state.query = event.currentTarget.value;
+    persistState();
     render();
   });
 
   refs.quickRandom.addEventListener("click", pickRandom);
+
+  refs.generateDemo?.addEventListener("click", () => {
+    switchView("explore");
+    pickRandom();
+  });
+
+  refs.searchInput.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+      return;
+    }
+
+    if (!state.query) {
+      return;
+    }
+
+    state.query = "";
+    refs.searchInput.value = "";
+    persistState();
+    render();
+    showToast("Recherche effacee");
+  });
 
   refs.navButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -621,7 +751,9 @@ async function initApp() {
   updateDesktopStats(0);
 
   pokedex = await buildPokedexFromAssets();
+  hydrateStateFromStorage();
   syncStateWithData();
+  persistState();
   render();
 }
 

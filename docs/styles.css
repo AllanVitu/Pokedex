@@ -25,6 +25,20 @@ body {
   min-height: 100%;
 }
 
+button,
+input {
+  font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+.nav-btn:focus-visible,
+.type-chip:focus-visible,
+.favorite-btn:focus-visible {
+  outline: 2px solid #2d8e60;
+  outline-offset: 2px;
+}
+
 body {
   background: radial-gradient(
     circle at 22% 12%,
@@ -46,6 +60,48 @@ body {
   width: min(1220px, 100%);
   margin-inline: auto;
   gap: 24px;
+}
+
+.toast-host {
+  position: fixed;
+  right: 16px;
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  z-index: 50;
+  display: grid;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  border-radius: 12px;
+  border: 1px solid rgba(230, 255, 236, 0.7);
+  background: rgba(15, 48, 30, 0.88);
+  color: #f0fff4;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(7, 23, 14, 0.3);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: toast-in 220ms ease forwards;
+}
+
+.toast.out {
+  animation: toast-out 180ms ease forwards;
+}
+
+@keyframes toast-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
 }
 
 .desktop-hub {
@@ -361,6 +417,13 @@ h1 span {
   font-weight: 600;
   color: #24333c;
   cursor: pointer;
+  transition:
+    transform 140ms ease,
+    filter 180ms ease;
+}
+
+.soft-btn:hover {
+  filter: brightness(0.98);
 }
 
 .soft-btn:active {
@@ -518,6 +581,14 @@ h2 {
   font-size: 19px;
   color: #3c4c55;
   cursor: pointer;
+  transition:
+    transform 140ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.04);
 }
 
 .favorite-btn.active {
@@ -650,7 +721,12 @@ h2 {
   cursor: pointer;
   transition:
     transform 280ms cubic-bezier(0.2, 0.8, 0.3, 1),
-    opacity 220ms ease;
+    opacity 220ms ease,
+    filter 180ms ease;
+}
+
+.radial-action:hover {
+  filter: brightness(0.96);
 }
 
 .action-random {
@@ -944,6 +1020,17 @@ h2 {
     padding-right: 4px;
   }
 
+  .poke-card {
+    transition:
+      transform 180ms ease,
+      box-shadow 200ms ease;
+  }
+
+  .poke-card:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 22px 40px rgba(22, 66, 46, 0.16);
+  }
+
   .type-chip {
     background: rgba(239, 255, 245, 0.62);
     border-color: rgba(239, 255, 245, 0.82);
@@ -1036,6 +1123,10 @@ h2 {
   .detail-content {
     max-height: calc(100dvh - 118px);
     overflow: auto;
+  }
+
+  .toast-host {
+    bottom: 16px;
   }
 }
 
@@ -1232,5 +1323,16 @@ h2 {
     max-height: calc(100dvh - 98px);
     overflow: auto;
     padding-bottom: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
   }
 }
