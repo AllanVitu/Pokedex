@@ -4,178 +4,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Pokedex Mobile</title>
+  <title>RégionDex Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-  <div class="app-shell">
-    <aside class="desktop-hub" aria-label="Panneau desktop">
-      <section class="hub-card intro-card">
-        <p class="hub-kicker">Prompt Lab</p>
-        <h2>Generate Board</h2>
-        <div class="preview-strip" aria-hidden="true">
-          <figure class="preview-card">
-            <img src="./assets/imgs/Vogsral_mobile_optimized.webp" alt="" loading="lazy" />
-          </figure>
-          <figure class="preview-card">
-            <img src="./assets/imgs/Juracron_mobile_optimized.webp" alt="" loading="lazy" />
-          </figure>
-          <figure class="preview-card">
-            <img src="./assets/imgs/Belforion_mobile_optimized.webp" alt="" loading="lazy" />
-          </figure>
-        </div>
-        <label class="prompt-field">
-          Prompt:
-          <input
-            type="text"
-            value="Image de creature pokemon en style carte avec details fantasy."
-            readonly
-          />
-        </label>
-        <button class="generate-demo" id="generateDemo" type="button">GENERATE</button>
-      </section>
+  <div class="app-container">
+    <header class="grand-header">
+      <div class="header-content">
+        <p class="kicker">The Regional Collection</p>
+        <h1>RégionDex <span>Studio</span></h1>
 
-      <section class="hub-card stats-card">
-        <h3>Live Stats</h3>
-        <div class="metric-grid">
-          <article>
-            <p>Total</p>
-            <strong id="desktopTotal">0</strong>
-          </article>
-          <article>
-            <p>Visible</p>
-            <strong id="desktopVisible">0</strong>
-          </article>
-          <article>
-            <p>Favoris</p>
-            <strong id="desktopFav">0</strong>
-          </article>
-          <article>
-            <p>Team</p>
-            <strong id="desktopTeam">0</strong>
-          </article>
-        </div>
-        <p class="view-tag" aria-live="polite">
-          Vue active:
-          <span id="desktopView">Explorer</span>
-        </p>
-      </section>
-
-      <section class="hub-card shortcuts-card">
-        <h3>Raccourcis</h3>
-        <ul class="shortcut-list">
-          <li><kbd>/</kbd> Focus recherche</li>
-          <li><kbd>1</kbd> Explorer</li>
-          <li><kbd>2</kbd> Favoris</li>
-          <li><kbd>3</kbd> Team</li>
-          <li><kbd>R</kbd> Random detail</li>
-        </ul>
-      </section>
-    </aside>
-
-    <article class="iphone16" id="iphone16">
-      <div class="status-strip">
-        <span>9:41</span>
-        <div class="status-icons">
-          <span aria-hidden="true">LTE</span>
-          <span aria-hidden="true">WiFi</span>
-          <span aria-hidden="true">Bat</span>
-        </div>
-      </div>
-      <div class="dynamic-island" aria-hidden="true"></div>
-
-      <main class="screen" id="screen">
-        <header class="app-header">
-          <div>
-            <p class="kicker">Pokemon Studio</p>
-            <h1>Generate your <span>custom</span> Pokedex</h1>
-          </div>
-          <button class="icon-btn" id="menuToggle" aria-label="Ouvrir le menu d'actions">
-            <span></span><span></span><span></span>
-          </button>
-        </header>
-
-        <section class="search-panel">
+        <div class="search-panel">
           <label class="search-input-wrap">
-            <span class="search-icon">Q</span>
-            <input id="searchInput" type="search" placeholder="Rechercher un pokemon ou un type" autocomplete="off" />
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input id="searchInput" type="search" placeholder="Search by name, type, or habitat..."
+              autocomplete="off" />
           </label>
-          <button id="quickRandom" class="soft-btn" type="button">Aleatoire</button>
-        </section>
-
-        <section class="types-row" id="typeFilters" aria-label="Filtres par type"></section>
-
-        <section class="content-head">
-          <h2 id="viewTitle">Explorer</h2>
-          <p id="resultCount">0 entrees</p>
-        </section>
-
-        <section class="deck" id="deck" aria-live="polite"></section>
-
-        <section class="empty-state hidden" id="emptyState">
-          <h3>Aucun resultat</h3>
-          <p>Essaie un autre filtre ou reinitialise la recherche.</p>
-        </section>
-
-        <div class="radial-menu" id="radialMenu" aria-hidden="true">
-          <button class="radial-action action-random" data-action="random" type="button">Random</button>
-          <button class="radial-action action-team" data-action="autoteam" type="button">Auto Team</button>
-          <button class="radial-action action-reset" data-action="reset" type="button">Reset</button>
+          <button id="quickRandom" class="soft-btn" type="button" aria-label="Random Discovery">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path>
+            </svg>
+          </button>
         </div>
 
-        <nav class="bottom-nav" aria-label="Navigation principale">
-          <button class="nav-btn active" data-view="explore" type="button">Explorer</button>
-          <button class="nav-btn" data-view="favorites" type="button">Favoris</button>
-          <button class="nav-btn" data-view="team" type="button">Team</button>
+        <nav class="main-nav" aria-label="Primary Navigation">
+          <button class="nav-btn active" data-view="explore" type="button">Explore</button>
+          <button class="nav-btn" data-view="favorites" type="button">Favorites</button>
+          <button class="nav-btn" data-view="team" type="button">Dream Team</button>
         </nav>
-      </main>
 
-      <div class="detail-overlay hidden" id="detailOverlay"></div>
-      <aside class="detail-sheet" id="detailSheet" aria-hidden="true">
-        <button class="close-sheet" id="closeDetail" aria-label="Fermer les details">Fermer</button>
+        <div class="types-row" id="typeFilters" aria-label="Filter by type"></div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="content-head">
+        <h2 id="viewTitle">Explore</h2>
+        <p id="resultCount">0 entries</p>
+      </div>
+
+      <section class="deck" id="deck" aria-live="polite"></section>
+
+      <section class="empty-state hidden" id="emptyState">
+        <h3>No results found</h3>
+        <p>Try clearing your search or selecting a different view.</p>
+        <button id="resetBtn" class="primary-btn" type="button">Reset Filters</button>
+      </section>
+    </main>
+
+    <aside class="detail-sheet" id="detailSheet" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="detail-overlay" id="detailOverlay" aria-label="Close details context"></div>
+      <div class="detail-panel">
+        <button class="close-sheet icon-btn" id="closeDetail" aria-label="Close Details">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
         <div class="detail-content" id="detailContent"></div>
-      </aside>
-    </article>
+      </div>
+    </aside>
   </div>
+
   <div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
 
   <template id="cardTemplate">
     <article class="poke-card">
-      <div class="media-wrap">
+      <div class="card-image-container">
+        <div class="card-bg-glow"></div>
         <img class="poke-image" alt="" loading="lazy" decoding="async" />
       </div>
-      <div class="badge-row">
+      <div class="card-header">
         <span class="id-badge"></span>
-        <button class="favorite-btn" type="button" aria-label="Ajouter aux favoris">Fav</button>
+        <button class="favorite-btn icon-btn" type="button" aria-label="Add to favorites">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            class="heart-icon">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+            </path>
+          </svg>
+        </button>
       </div>
-      <h3 class="poke-name"></h3>
-      <p class="poke-subtitle"></p>
-      <div class="chip-row"></div>
-      <dl class="stat-grid">
-        <div>
-          <dt>Poids</dt>
-          <dd class="weight"></dd>
-        </div>
-        <div>
-          <dt>Taille</dt>
-          <dd class="height"></dd>
-        </div>
-        <div>
-          <dt>Categorie</dt>
-          <dd class="category"></dd>
-        </div>
-      </dl>
-      <div class="card-actions">
-        <button class="soft-btn details-btn" type="button">Details</button>
-        <button class="soft-btn team-btn" type="button">+ Team</button>
+      <div class="card-body">
+        <p class="poke-subtitle"></p>
+        <h3 class="poke-name"></h3>
+        <div class="chip-row"></div>
       </div>
     </article>
+  </template>
+
+  <template id="detailTemplate">
+    <div class="detail-hero">
+      <div class="detail-hero-glow"></div>
+      <img class="detail-image" alt="" />
+    </div>
+    <div class="detail-info">
+      <div class="detail-header-row">
+        <div class="detail-titles">
+          <p class="detail-subtitle"><span class="detail-rarity"></span> &mdash; <span class="detail-habitat"></span>
+          </p>
+          <h2 class="detail-name"></h2>
+        </div>
+        <span class="detail-id"></span>
+      </div>
+
+      <div class="detail-chips"></div>
+
+      <p class="detail-summary"></p>
+
+      <dl class="detail-stats">
+        <div class="stat-item">
+          <dt>Weight</dt>
+          <dd class="val-weight"></dd>
+        </div>
+        <div class="stat-item">
+          <dt>Height</dt>
+          <dd class="val-height"></dd>
+        </div>
+        <div class="stat-item">
+          <dt>Category</dt>
+          <dd class="val-category"></dd>
+        </div>
+      </dl>
+
+      <div class="detail-talents-section">
+        <h3>Talents</h3>
+        <ul class="detail-talents"></ul>
+      </div>
+
+      <div class="detail-actions">
+        <button class="primary-btn team-btn" type="button">Add to Dream Team</button>
+      </div>
+    </div>
   </template>
 
   <script type="module" src="./app.js"></script>

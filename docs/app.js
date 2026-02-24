@@ -2,57 +2,158 @@ const allPokemon = [
   {
     id: "001",
     name: "Juracron",
-    image: "./assets/imgs/Juracron_mobile_optimized.webp",
+    image: "./assets/imgs/Juracron_card.webp",
     accent: "#b6dde0",
-    gradient: "linear-gradient(152deg, #d8eff0 0%, #b4dce0 44%, #d4ecf0 100%)",
-    types: ["Grass", "Water", "Rock"],
-    rarity: "Legendaire",
+    types: ["Nature", "Water", "Rock"],
+    rarity: "Legendary",
     weight: "450 kg",
     height: "3.0 m",
-    category: "Esprit Montagne",
-    habitat: "Souffle des Cascades",
+    category: "Mountain Spirit",
+    habitat: "Jura",
     summary:
-      "Gardien des lacs, forets et montagnes du Jura. Il equilibre l'eau et la roche.",
-    talents: ["Souffle des Cascades", "Colere des Montagnes", "Eternite du Jura"],
+      "Guardian of the lakes, forests, and mountains. It seamlessly balances the elements of water and rock across the region.",
+    talents: ["Cascades Breath", "Mountain's Wrath", "Jura's Eternity"],
   },
   {
     id: "090",
     name: "Belforion",
-    image: "./assets/imgs/Belforion_mobile_optimized.webp",
+    image: "./assets/imgs/Belforion_card.webp",
     accent: "#f1c58e",
-    gradient: "linear-gradient(152deg, #f8d7a8 0%, #f3c381 43%, #f7dcba 100%)",
     types: ["Fire", "Rock"],
-    rarity: "Mythique",
+    rarity: "Mythical",
     weight: "310 kg",
     height: "2.0 m",
-    category: "Lion Bastion",
-    habitat: "Bastion de Belfort",
+    category: "Bastion Lion",
+    habitat: "Belfort",
     summary:
-      "Protecteur des remparts et symbole de courage. Son rugissement embrase la pierre.",
-    talents: ["Rugissement Triomphal", "Bastion de Belfort", "Garde Flamboyante"],
+      "Protector of the ancient ramparts and a symbol of courage. Its roar alone can set the very stones ablaze.",
+    talents: ["Triumphant Roar", "Bastion's Aegis", "Flaming Guard"],
   },
   {
     id: "165",
-    name: "Vogsral",
-    image: "./assets/imgs/Vogsral_mobile_optimized.webp",
+    name: "Vogsrâl",
+    image: "./assets/imgs/Vogsrâl_card.webp",
     accent: "#b8d9b2",
-    gradient: "linear-gradient(152deg, #d5e9d2 0%, #badab5 43%, #dff0dd 100%)",
-    types: ["Grass", "Psychic"],
+    types: ["Nature", "Mystic"],
     rarity: "Rare",
     weight: "310 kg",
     height: "1.6 m",
-    category: "Cerf des Brumes",
-    habitat: "Brume Ailee",
+    category: "Mist Stag",
+    habitat: "Vosges",
     summary:
-      "Esprit des Vosges. Il veille sur les forets et guide les voyageurs perdus dans la brume.",
-    talents: ["Brume Envoutante", "Souffle des Vosges", "Regard Sylvestre"],
+      "The spirit of the Vosges. It watches over the deep forests and guides lost travelers through the dense morning mist.",
+    talents: ["Enchanting Mist", "Vosges' Breath", "Sylvan Gaze"],
   },
+  {
+    id: "067",
+    name: "Alsace",
+    image: "./assets/imgs/Alsace_card.webp",
+    accent: "#f4a261",
+    types: ["Heritage", "Gastronomy"],
+    rarity: "Epic",
+    weight: "Unknown",
+    height: "Vast",
+    category: "Historical Realm",
+    habitat: "Eastern Border",
+    summary:
+      "A region characterized by its picturesque villages and rich culinary heritage. It breathes history and tradition.",
+    talents: ["Stork's Blessing", "Pretzel Shield", "Vineyard Aura"],
+  },
+  {
+    id: "029",
+    name: "Bretagne",
+    image: "./assets/imgs/Bretagne_card.webp",
+    accent: "#457b9d",
+    types: ["Ocean", "Legend"],
+    rarity: "Epic",
+    weight: "Oceanic",
+    height: "Coastal",
+    category: "Maritime Land",
+    habitat: "Western Peninsula",
+    summary:
+      "A land forged by the sea and ancient Celtic legends. Its stormy coasts hide secrets of times long past.",
+    talents: ["Ocean's Roar", "Granite Will", "Celtic Magic"],
+  },
+  {
+    id: "034",
+    name: "Espagne",
+    image: "./assets/imgs/Espagne_card.webp",
+    accent: "#e9c46a",
+    types: ["Sun", "Passion"],
+    rarity: "Legendary",
+    weight: "Continental",
+    height: "Vast",
+    category: "Southern Kingdom",
+    habitat: "Iberian Peninsula",
+    summary:
+      "A sun-drenched land of passion, history, and vibrant cultures. It radiates a warm, unyielding energy.",
+    talents: ["Solar Flare", "Flamenco Rhythm", "Tapas Feast"],
+  },
+  {
+    id: "075",
+    name: "Île-de-France",
+    image: "./assets/imgs/Ile_de_France_card.webp",
+    accent: "#1d3557",
+    types: ["Urban", "Culture"],
+    rarity: "Epic",
+    weight: "Dense",
+    height: "Monumental",
+    category: "Metropolitan Core",
+    habitat: "Central Basin",
+    summary:
+      "The bustling heart of the country, radiating culture, power, and architectural wonders. It never sleeps.",
+    talents: ["City Lights", "Metro Network", "Architect's Vision"],
+  },
+  {
+    id: "039",
+    name: "Italie",
+    image: "./assets/imgs/Italie_card.webp",
+    accent: "#2a9d8f",
+    types: ["Art", "History"],
+    rarity: "Legendary",
+    weight: "Peninsular",
+    height: "Alpine to Coastal",
+    category: "Ancient Empire",
+    habitat: "Mediterranean",
+    summary:
+      "A majestic long land bridging Europe and the sea, overflowing with timeless art, history, and romance.",
+    talents: ["Renaissance Masterpiece", "Colosseum Echo", "Dolce Vita"],
+  },
+  {
+    id: "064",
+    name: "Pays Basque",
+    image: "./assets/imgs/Pays_Basque_card.webp",
+    accent: "#e76f51",
+    types: ["Tradition", "Ocean"],
+    rarity: "Rare",
+    weight: "Rugged",
+    height: "Mountainous",
+    category: "Proud Domain",
+    habitat: "Pyrenees & Coast",
+    summary:
+      "A proud and ancient region nestled between the mountains and the ocean, preserving an enigmatic culture.",
+    talents: ["Oceanic Surf", "Mountain Echo", "Espelette Spice"],
+  },
+  {
+    id: "035",
+    name: "Portugal",
+    image: "./assets/imgs/Portugal_card.webp",
+    accent: "#8ecae6",
+    types: ["Ocean", "Discovery"],
+    rarity: "Legendary",
+    weight: "Continental",
+    height: "Coastal",
+    category: "Explorer's Land",
+    habitat: "Western Edge",
+    summary:
+      "A coastal nation of explorers and beautiful tiled streets, forever gazing out into the vast Atlantic.",
+    talents: ["Atlantic Breeze", "Explorer's Compass", "Golden Tile"],
+  }
 ];
 
-const DEFAULT_ACCENT = "#87c39f";
-const DEFAULT_GRADIENT = "linear-gradient(150deg, #e8f0f5, #f3ece4 42%, #d9e8df)";
-const STORAGE_KEY = "pokedex_studio_state_v1";
-const TOAST_DURATION = 1800;
+const DEFAULT_ACCENT = "#B8D9B2";
+const STORAGE_KEY = "pokedex_studio_v2";
+const TOAST_DURATION = 2500;
 
 let pokedex = [];
 
@@ -62,59 +163,27 @@ const state = {
   view: "explore",
   favorites: new Set(["001"]),
   team: new Set(["001", "090"]),
-  menuOpen: false,
 };
 
 const refs = {
   root: document.documentElement,
-  iphone: document.querySelector("#iphone16"),
   searchInput: document.querySelector("#searchInput"),
   quickRandom: document.querySelector("#quickRandom"),
   typeFilters: document.querySelector("#typeFilters"),
   deck: document.querySelector("#deck"),
   emptyState: document.querySelector("#emptyState"),
-  emptyStateTitle: document.querySelector("#emptyState h3"),
-  emptyStateText: document.querySelector("#emptyState p"),
+  resetBtn: document.querySelector("#resetBtn"),
   viewTitle: document.querySelector("#viewTitle"),
   resultCount: document.querySelector("#resultCount"),
   cardTemplate: document.querySelector("#cardTemplate"),
+  detailTemplate: document.querySelector("#detailTemplate"),
   navButtons: Array.from(document.querySelectorAll(".nav-btn")),
-  menuToggle: document.querySelector("#menuToggle"),
-  radialMenu: document.querySelector("#radialMenu"),
-  detailOverlay: document.querySelector("#detailOverlay"),
   detailSheet: document.querySelector("#detailSheet"),
+  detailOverlay: document.querySelector("#detailOverlay"),
   detailContent: document.querySelector("#detailContent"),
   closeDetail: document.querySelector("#closeDetail"),
-  desktopTotal: document.querySelector("#desktopTotal"),
-  desktopVisible: document.querySelector("#desktopVisible"),
-  desktopFav: document.querySelector("#desktopFav"),
-  desktopTeam: document.querySelector("#desktopTeam"),
-  desktopView: document.querySelector("#desktopView"),
   toastHost: document.querySelector("#toastHost"),
-  generateDemo: document.querySelector("#generateDemo"),
 };
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
-
-function darken(hex, amount) {
-  const raw = hex.replace("#", "");
-  const normal = raw.length === 3 ? raw.split("").map((c) => c + c).join("") : raw;
-  const int = Number.parseInt(normal, 16);
-  const r = clamp(((int >> 16) & 0xff) - amount, 0, 255);
-  const g = clamp(((int >> 8) & 0xff) - amount, 0, 255);
-  const b = clamp((int & 0xff) - amount, 0, 255);
-  return `rgb(${r}, ${g}, ${b})`;
-}
 
 function persistState() {
   try {
@@ -126,57 +195,31 @@ function persistState() {
       team: [...state.team],
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-  } catch {
-    // Ignore write failures in restricted contexts.
-  }
+  } catch { }
 }
 
 function hydrateStateFromStorage() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) {
-      return;
-    }
-
+    if (!raw) return;
     const parsed = JSON.parse(raw);
-    if (typeof parsed.query === "string") {
-      state.query = parsed.query;
-    }
-
-    if (typeof parsed.type === "string") {
-      state.type = parsed.type;
-    }
-
-    if (parsed.view === "explore" || parsed.view === "favorites" || parsed.view === "team") {
-      state.view = parsed.view;
-    }
-
-    if (Array.isArray(parsed.favorites)) {
-      state.favorites = new Set(parsed.favorites.map(String));
-    }
-
-    if (Array.isArray(parsed.team)) {
-      state.team = new Set(parsed.team.map(String));
-    }
-  } catch {
-    // Ignore malformed storage payloads.
-  }
+    if (typeof parsed.query === "string") state.query = parsed.query;
+    if (typeof parsed.type === "string") state.type = parsed.type;
+    if (["explore", "favorites", "team"].includes(parsed.view)) state.view = parsed.view;
+    if (Array.isArray(parsed.favorites)) state.favorites = new Set(parsed.favorites.map(String));
+    if (Array.isArray(parsed.team)) state.team = new Set(parsed.team.map(String));
+  } catch { }
 }
 
 function showToast(message) {
-  if (!refs.toastHost) {
-    return;
-  }
-
+  if (!refs.toastHost) return;
   const toast = document.createElement("div");
   toast.className = "toast";
   toast.textContent = message;
-
   refs.toastHost.append(toast);
-
   window.setTimeout(() => {
     toast.classList.add("out");
-    window.setTimeout(() => toast.remove(), 200);
+    window.setTimeout(() => toast.remove(), 250);
   }, TOAST_DURATION);
 }
 
@@ -185,46 +228,28 @@ function getUniqueTypes() {
 }
 
 function getViewLabel() {
-  return state.view === "favorites"
-    ? "Favoris"
-    : state.view === "team"
-      ? "Team Builder"
-      : "Explorer";
+  if (state.view === "favorites") return "Favorites";
+  if (state.view === "team") return "Dream Team";
+  return "Explore";
 }
 
 function applyAccent(item) {
   const accent = item?.accent ?? DEFAULT_ACCENT;
-  const gradient = item?.gradient ?? DEFAULT_GRADIENT;
   refs.root.style.setProperty("--accent", accent);
-  refs.root.style.setProperty("--accent-strong", darken(accent, 18));
-  refs.root.style.setProperty("--phone-bg", gradient);
 }
 
 function getDisplayList() {
   const query = state.query.trim().toLowerCase();
-
   const scoped = pokedex.filter((item) => {
-    if (state.view === "favorites" && !state.favorites.has(item.id)) {
-      return false;
-    }
-
-    if (state.view === "team" && !state.team.has(item.id)) {
-      return false;
-    }
-
+    if (state.view === "favorites" && !state.favorites.has(item.id)) return false;
+    if (state.view === "team" && !state.team.has(item.id)) return false;
     return true;
   });
 
   return scoped.filter((item) => {
     const passesType = state.type === "All" || item.types.includes(state.type);
-    if (!passesType) {
-      return false;
-    }
-
-    if (!query) {
-      return true;
-    }
-
+    if (!passesType) return false;
+    if (!query) return true;
     return (
       item.name.toLowerCase().includes(query) ||
       item.types.some((type) => type.toLowerCase().includes(query)) ||
@@ -235,19 +260,7 @@ function getDisplayList() {
 
 function updateHeader(listLength) {
   refs.viewTitle.textContent = getViewLabel();
-  refs.resultCount.textContent = `${listLength} ${listLength > 1 ? "entrees" : "entree"}`;
-}
-
-function updateDesktopStats(listLength) {
-  if (!refs.desktopTotal) {
-    return;
-  }
-
-  refs.desktopTotal.textContent = String(pokedex.length);
-  refs.desktopVisible.textContent = String(listLength);
-  refs.desktopFav.textContent = String(state.favorites.size);
-  refs.desktopTeam.textContent = String(state.team.size);
-  refs.desktopView.textContent = getViewLabel();
+  refs.resultCount.textContent = `${listLength} ${listLength === 1 ? "entry" : "entries"}`;
 }
 
 function syncNavButtons() {
@@ -259,7 +272,6 @@ function syncNavButtons() {
 function renderTypeFilters(types) {
   refs.typeFilters.innerHTML = "";
   const fragment = document.createDocumentFragment();
-
   for (const type of types) {
     const button = document.createElement("button");
     button.type = "button";
@@ -272,12 +284,7 @@ function renderTypeFilters(types) {
     });
     fragment.append(button);
   }
-
   refs.typeFilters.append(fragment);
-}
-
-function isInTeam(id) {
-  return state.team.has(id);
 }
 
 function toggleTeam(id) {
@@ -285,50 +292,35 @@ function toggleTeam(id) {
     state.team.delete(id);
     return "removed";
   }
-
-  if (state.team.size >= 3) {
-    const [first] = state.team;
-    state.team.delete(first);
+  if (state.team.size >= 6) {
+    showToast("Dream Team is full (Max 6)");
+    return "full";
   }
   state.team.add(id);
   return "added";
 }
 
-function createImageFallback(mediaWrap, item) {
-  if (mediaWrap.querySelector(".image-fallback")) {
-    return;
-  }
-
+function createImageFallback(container, item) {
+  if (container.querySelector(".image-fallback")) return;
   const fallback = document.createElement("div");
   fallback.className = "image-fallback";
-  fallback.textContent = item.name.slice(0, 3).toUpperCase();
-  mediaWrap.append(fallback);
+  fallback.textContent = item.name.slice(0, 2).toUpperCase();
+  container.append(fallback);
 }
 
-function bindCardImage(node, item) {
-  const mediaWrap = node.querySelector(".media-wrap");
-  const image = node.querySelector(".poke-image");
-
-  image.style.display = "block";
-
+function bindImage(container, imgElement, item) {
+  imgElement.style.display = "block";
   if (!item.image) {
-    image.removeAttribute("src");
-    image.alt = `${item.name} sans image`;
-    image.style.display = "none";
-    createImageFallback(mediaWrap, item);
+    imgElement.style.display = "none";
+    createImageFallback(container, item);
     return;
   }
-
-  image.src = item.image;
-  image.alt = item.name;
-  image.addEventListener(
-    "error",
-    () => {
-      image.style.display = "none";
-      createImageFallback(mediaWrap, item);
-    },
-    { once: true },
-  );
+  imgElement.src = item.image;
+  imgElement.alt = item.name;
+  imgElement.addEventListener("error", () => {
+    imgElement.style.display = "none";
+    createImageFallback(container, item);
+  }, { once: true });
 }
 
 function renderCards(items) {
@@ -337,17 +329,19 @@ function renderCards(items) {
 
   items.forEach((item, index) => {
     const node = refs.cardTemplate.content.firstElementChild.cloneNode(true);
-    node.style.background = item.gradient;
-    node.style.animationDelay = `${index * 45}ms`;
+    node.style.animationDelay = `${index * 40}ms`;
 
-    bindCardImage(node, item);
+    // Apply specific accent color to the card glow
+    const glow = node.querySelector(".card-bg-glow");
+    if (glow && item.accent) {
+      glow.style.background = item.accent;
+    }
+
+    bindImage(node.querySelector(".card-image-container"), node.querySelector(".poke-image"), item);
 
     node.querySelector(".id-badge").textContent = `#${item.id}`;
     node.querySelector(".poke-name").textContent = item.name;
-    node.querySelector(".poke-subtitle").textContent = `${item.rarity} | ${item.habitat}`;
-    node.querySelector(".weight").textContent = item.weight;
-    node.querySelector(".height").textContent = item.height;
-    node.querySelector(".category").textContent = item.category;
+    node.querySelector(".poke-subtitle").textContent = `${item.rarity} \u2014 ${item.category}`;
 
     const chipRow = node.querySelector(".chip-row");
     item.types.forEach((type) => {
@@ -360,52 +354,25 @@ function renderCards(items) {
     const favoriteBtn = node.querySelector(".favorite-btn");
     const isFavorite = state.favorites.has(item.id);
     favoriteBtn.classList.toggle("active", isFavorite);
-    favoriteBtn.textContent = "Fav";
-    favoriteBtn.setAttribute(
-      "aria-label",
-      isFavorite ? "Retirer des favoris" : "Ajouter aux favoris",
-    );
-    favoriteBtn.setAttribute("aria-pressed", String(isFavorite));
-
     favoriteBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       if (state.favorites.has(item.id)) {
         state.favorites.delete(item.id);
-        showToast(`${item.name} retire des favoris`);
+        favoriteBtn.classList.remove("active");
+        showToast(`${item.name} removed from favorites`);
       } else {
         state.favorites.add(item.id);
-        showToast(`${item.name} ajoute aux favoris`);
+        favoriteBtn.classList.add("active");
+        showToast(`${item.name} added to favorites`);
       }
       persistState();
-      render();
+      // Only re-render if we are in the favorites view to avoid full re-paints
+      if (state.view === "favorites") render();
     });
 
-    const teamBtn = node.querySelector(".team-btn");
-    const inTeam = isInTeam(item.id);
-    teamBtn.textContent = inTeam ? "In Team" : "+ Team";
-    teamBtn.setAttribute("aria-pressed", String(inTeam));
-    teamBtn.setAttribute("aria-label", inTeam ? "Retirer de l'equipe" : "Ajouter a l'equipe");
-    teamBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const change = toggleTeam(item.id);
-      showToast(
-        change === "added"
-          ? `${item.name} ajoute a l'equipe`
-          : `${item.name} retire de l'equipe`,
-      );
-      persistState();
-      render();
-    });
-
-    const openDetails = () => {
+    node.addEventListener("click", () => {
       applyAccent(item);
       openDetail(item);
-    };
-
-    node.addEventListener("click", openDetails);
-    node.querySelector(".details-btn").addEventListener("click", (event) => {
-      event.stopPropagation();
-      openDetails();
     });
 
     fragment.append(node);
@@ -418,94 +385,99 @@ function renderEmptyState(itemsLength) {
   if (itemsLength > 0) {
     refs.emptyState.classList.add("hidden");
     refs.deck.classList.remove("hidden");
-    return;
+  } else {
+    refs.emptyState.classList.remove("hidden");
+    refs.deck.classList.add("hidden");
   }
-
-  refs.emptyState.classList.remove("hidden");
-  refs.deck.classList.add("hidden");
-
-  if (pokedex.length === 0) {
-    refs.emptyStateTitle.textContent = "Aucune carte disponible";
-    refs.emptyStateText.textContent =
-      "Ajoute des images dans docs/assets/imgs puis recharge la page.";
-    return;
-  }
-
-  refs.emptyStateTitle.textContent = "Aucun resultat";
-  refs.emptyStateText.textContent = "Essaie un autre filtre ou reinitialise la recherche.";
 }
 
 function render() {
   if (refs.searchInput.value !== state.query) {
     refs.searchInput.value = state.query;
   }
-
   syncNavButtons();
-  refs.menuToggle.setAttribute("aria-expanded", String(state.menuOpen));
 
   const types = getUniqueTypes();
   if (!types.includes(state.type)) {
     state.type = "All";
     persistState();
   }
-
   renderTypeFilters(types);
-  const items = getDisplayList();
 
+  const items = getDisplayList();
   updateHeader(items.length);
-  updateDesktopStats(items.length);
   renderEmptyState(items.length);
 
   if (items.length > 0) {
     renderCards(items);
-    applyAccent(items[0]);
-    return;
   }
-
-  applyAccent(pokedex[0]);
-}
-
-function renderDetail(item) {
-  refs.detailContent.innerHTML = `
-    <h3>${escapeHtml(item.name)} <small>#${escapeHtml(item.id)}</small></h3>
-    <p><strong>${escapeHtml(item.rarity)}</strong> | ${escapeHtml(item.habitat)}</p>
-    <p>${item.types.map((type) => `<span class="tag-chip">${escapeHtml(type)}</span>`).join(" ")}</p>
-    <p>${escapeHtml(item.summary)}</p>
-    <dl class="stat-grid">
-      <div>
-        <dt>Poids</dt>
-        <dd>${escapeHtml(item.weight)}</dd>
-      </div>
-      <div>
-        <dt>Taille</dt>
-        <dd>${escapeHtml(item.height)}</dd>
-      </div>
-      <div>
-        <dt>Rarete</dt>
-        <dd>${escapeHtml(item.rarity)}</dd>
-      </div>
-    </dl>
-    <ul class="detail-list">
-      ${item.talents.map((talent) => `<li>${escapeHtml(talent)}</li>`).join("")}
-    </ul>
-  `;
 }
 
 function openDetail(item) {
-  renderDetail(item);
-  refs.detailOverlay.classList.remove("hidden");
-  refs.detailOverlay.classList.add("open");
+  refs.detailContent.innerHTML = "";
+  const node = refs.detailTemplate.content.cloneNode(true);
+
+  if (item.accent) {
+    node.querySelector(".detail-hero-glow").style.background = item.accent;
+  }
+
+  bindImage(node.querySelector(".detail-hero"), node.querySelector(".detail-image"), item);
+
+  node.querySelector(".detail-rarity").textContent = item.rarity;
+  node.querySelector(".detail-habitat").textContent = item.habitat;
+  node.querySelector(".detail-name").textContent = item.name;
+  node.querySelector(".detail-id").textContent = `#${item.id}`;
+  node.querySelector(".detail-summary").textContent = item.summary;
+  node.querySelector(".val-weight").textContent = item.weight;
+  node.querySelector(".val-height").textContent = item.height;
+  node.querySelector(".val-category").textContent = item.category;
+
+  const chips = node.querySelector(".detail-chips");
+  item.types.forEach((type) => {
+    const chip = document.createElement("span");
+    chip.className = "tag-chip";
+    chip.textContent = type;
+    chips.append(chip);
+  });
+
+  const talentsList = node.querySelector(".detail-talents");
+  item.talents.forEach((talent) => {
+    const li = document.createElement("li");
+    li.textContent = talent;
+    talentsList.append(li);
+  });
+
+  const teamBtn = node.querySelector(".team-btn");
+  const inTeam = state.team.has(item.id);
+  teamBtn.textContent = inTeam ? "Remove from Dream Team" : "Add to Dream Team";
+  if (inTeam) teamBtn.classList.add("active");
+
+  teamBtn.addEventListener("click", () => {
+    const res = toggleTeam(item.id);
+    if (res === "added") {
+      teamBtn.textContent = "Remove from Dream Team";
+      teamBtn.classList.add("active");
+      showToast(`${item.name} joined the Dream Team!`);
+    } else if (res === "removed") {
+      teamBtn.textContent = "Add to Dream Team";
+      teamBtn.classList.remove("active");
+      showToast(`${item.name} left the Dream Team.`);
+    }
+    persistState();
+    if (state.view === "team") render();
+  });
+
+  refs.detailContent.append(node);
+
   refs.detailSheet.classList.add("open");
   refs.detailSheet.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden"; // Prevent background scroll
 }
 
 function closeDetail() {
-  refs.detailOverlay.classList.remove("open");
   refs.detailSheet.classList.remove("open");
   refs.detailSheet.setAttribute("aria-hidden", "true");
-  window.setTimeout(() => {
-    refs.detailOverlay.classList.add("hidden");
-  }, 220);
+  document.body.style.overflow = "";
 }
 
 function switchView(nextView) {
@@ -516,34 +488,11 @@ function switchView(nextView) {
 }
 
 function pickRandom() {
-  if (pokedex.length === 0) {
-    showToast("Aucune carte disponible");
-    return;
-  }
-
+  if (pokedex.length === 0) return;
   const index = Math.floor(Math.random() * pokedex.length);
   const item = pokedex[index];
   applyAccent(item);
   openDetail(item);
-  showToast(`${item.name} selection aleatoire`);
-}
-
-function autoBuildTeam() {
-  if (pokedex.length === 0) {
-    showToast("Aucune carte disponible");
-    return;
-  }
-
-  const pool = [...pokedex];
-  for (let i = pool.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  const size = Math.min(3, pool.length);
-  state.team = new Set(pool.slice(0, size).map((item) => item.id));
-  persistState();
-  showToast("Team auto generee");
-  switchView("team");
 }
 
 function resetFilters() {
@@ -551,177 +500,41 @@ function resetFilters() {
   state.type = "All";
   refs.searchInput.value = "";
   persistState();
-  showToast("Filtres reinitialises");
   render();
-}
-
-function toggleMenu(forceState) {
-  if (typeof forceState === "boolean") {
-    state.menuOpen = forceState;
-  } else {
-    state.menuOpen = !state.menuOpen;
-  }
-  refs.radialMenu.classList.toggle("open", state.menuOpen);
-  refs.menuToggle.setAttribute("aria-expanded", String(state.menuOpen));
-}
-
-function isEditableTarget(target) {
-  if (!(target instanceof HTMLElement)) {
-    return false;
-  }
-
-  return (
-    target.tagName === "INPUT" ||
-    target.tagName === "TEXTAREA" ||
-    target.isContentEditable
-  );
+  showToast("Filters reset");
 }
 
 function setupEvents() {
-  refs.searchInput.addEventListener("input", (event) => {
-    state.query = event.currentTarget.value;
+  refs.searchInput.addEventListener("input", (e) => {
+    state.query = e.target.value;
     persistState();
     render();
   });
 
   refs.quickRandom.addEventListener("click", pickRandom);
+  refs.resetBtn.addEventListener("click", resetFilters);
 
-  refs.generateDemo?.addEventListener("click", () => {
-    switchView("explore");
-    pickRandom();
+  refs.navButtons.forEach((btn) => {
+    btn.addEventListener("click", () => switchView(btn.dataset.view));
   });
 
-  refs.searchInput.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") {
-      return;
-    }
-
-    if (!state.query) {
-      return;
-    }
-
-    state.query = "";
-    refs.searchInput.value = "";
-    persistState();
-    render();
-    showToast("Recherche effacee");
-  });
-
-  refs.navButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      switchView(button.dataset.view);
-    });
-  });
-
-  refs.menuToggle.addEventListener("click", () => {
-    toggleMenu();
-  });
-
-  refs.radialMenu.addEventListener("click", (event) => {
-    const action = event.target.closest("[data-action]")?.dataset.action;
-    if (!action) {
-      return;
-    }
-
-    if (action === "random") {
-      pickRandom();
-    } else if (action === "autoteam") {
-      autoBuildTeam();
-    } else if (action === "reset") {
-      resetFilters();
-    }
-
-    toggleMenu(false);
-  });
-
-  refs.detailOverlay.addEventListener("click", closeDetail);
   refs.closeDetail.addEventListener("click", closeDetail);
+  refs.detailOverlay.addEventListener("click", closeDetail);
 
-  refs.iphone.addEventListener("click", (event) => {
-    if (!state.menuOpen) {
-      return;
-    }
-
-    const isInsideMenu = event.target.closest("#radialMenu, #menuToggle");
-    if (!isInsideMenu) {
-      toggleMenu(false);
-    }
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDetail();
   });
-
-  window.addEventListener("keydown", (event) => {
-    if (isEditableTarget(event.target) && event.key !== "Escape") {
-      return;
-    }
-
-    if (event.key === "/") {
-      event.preventDefault();
-      refs.searchInput.focus();
-      return;
-    }
-
-    if (event.key === "1") {
-      switchView("explore");
-      return;
-    }
-
-    if (event.key === "2") {
-      switchView("favorites");
-      return;
-    }
-
-    if (event.key === "3") {
-      switchView("team");
-      return;
-    }
-
-    if (event.key.toLowerCase() === "r") {
-      pickRandom();
-      return;
-    }
-
-    if (event.key === "Escape") {
-      closeDetail();
-      toggleMenu(false);
-    }
-  });
-}
-
-function syncStateWithData() {
-  const validIds = new Set(pokedex.map((item) => item.id));
-
-  state.favorites = new Set([...state.favorites].filter((id) => validIds.has(id)));
-
-  const nextTeam = [...state.team].filter((id) => validIds.has(id));
-  if (nextTeam.length === 0 && pokedex[0]) {
-    nextTeam.push(pokedex[0].id);
-  }
-  state.team = new Set(nextTeam.slice(0, 3));
 }
 
 function probeImage(src) {
   return new Promise((resolve) => {
-    if (!src) {
-      resolve(false);
-      return;
-    }
-
+    if (!src) return resolve(false);
     const image = new Image();
-    const timeoutId = window.setTimeout(() => {
-      image.onload = null;
-      image.onerror = null;
-      resolve(false);
-    }, 2200);
-
-    image.onload = () => {
-      window.clearTimeout(timeoutId);
-      resolve(true);
-    };
-
-    image.onerror = () => {
-      window.clearTimeout(timeoutId);
-      resolve(false);
-    };
-
+    const timer = setTimeout(() => {
+      image.onload = null; image.onerror = null; resolve(false);
+    }, 2000);
+    image.onload = () => { clearTimeout(timer); resolve(true); };
+    image.onerror = () => { clearTimeout(timer); resolve(false); };
     image.src = src;
   });
 }
@@ -731,28 +544,22 @@ async function buildPokedexFromAssets() {
     allPokemon.map(async (item) => {
       const available = await probeImage(item.image);
       return { item, available };
-    }),
+    })
   );
-
-  const availableEntries = checks
-    .filter((entry) => entry.available)
-    .map((entry) => entry.item);
-
-  if (availableEntries.length > 0) {
-    return availableEntries;
-  }
-
-  return allPokemon.map((item) => ({ ...item, image: "" }));
+  const available = checks.filter(c => c.available).map(c => c.item);
+  return available.length > 0 ? available : allPokemon.map(i => ({ ...i, image: "" }));
 }
 
 async function initApp() {
   applyAccent();
-  updateHeader(0);
-  updateDesktopStats(0);
-
   pokedex = await buildPokedexFromAssets();
   hydrateStateFromStorage();
-  syncStateWithData();
+
+  // Clean invalid favorites/team due to pokedex changes
+  const validIds = new Set(pokedex.map(i => i.id));
+  state.favorites = new Set([...state.favorites].filter(id => validIds.has(id)));
+  state.team = new Set([...state.team].filter(id => validIds.has(id)));
+
   persistState();
   render();
 }
