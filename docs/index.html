@@ -1,43 +1,122 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokédex - 151 Pokémon</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1 class="title">Pokédex</h1>
-            <div class="search-container">
-                <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un Pokémon...">
-                <select id="typeFilter" class="type-filter">
-                    <option value="">Tous les types</option>
-                </select>
-            </div>
-        </header>
-
-        <div id="loadingScreen" class="loading-screen">
-            <div class="pokeball-loader"></div>
-            <p>Chargement des Pokémon...</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Pokedex Mobile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <article class="iphone16" id="iphone16">
+        <div class="status-strip">
+          <span>9:41</span>
+          <div class="status-icons">
+            <span aria-hidden="true">LTE</span>
+            <span aria-hidden="true">WiFi</span>
+            <span aria-hidden="true">Bat</span>
+          </div>
         </div>
+        <div class="dynamic-island" aria-hidden="true"></div>
 
-        <main class="pokemon-grid" id="pokemonGrid">
-            <!-- Les cartes Pokémon seront générées ici -->
+        <main class="screen" id="screen">
+          <header class="app-header">
+            <div>
+              <p class="kicker">Edition mobile</p>
+              <h1>Pokedex Mythique</h1>
+            </div>
+            <button class="icon-btn" id="menuToggle" aria-label="Ouvrir le menu d'actions">
+              <span></span><span></span><span></span>
+            </button>
+          </header>
+
+          <section class="search-panel">
+            <label class="search-input-wrap">
+              <span class="search-icon">Q</span>
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Rechercher un pokemon ou un type"
+                autocomplete="off"
+              />
+            </label>
+            <button id="quickRandom" class="soft-btn" type="button">Aleatoire</button>
+          </section>
+
+          <section class="types-row" id="typeFilters" aria-label="Filtres par type"></section>
+
+          <section class="content-head">
+            <h2 id="viewTitle">Explorer</h2>
+            <p id="resultCount">0 entrees</p>
+          </section>
+
+          <section class="deck" id="deck" aria-live="polite"></section>
+
+          <section class="empty-state hidden" id="emptyState">
+            <h3>Aucun resultat</h3>
+            <p>Essaie un autre filtre ou reinitialise la recherche.</p>
+          </section>
+
+          <div class="radial-menu" id="radialMenu" aria-hidden="true">
+            <button class="radial-action action-random" data-action="random" type="button">Random</button>
+            <button class="radial-action action-team" data-action="autoteam" type="button">Auto Team</button>
+            <button class="radial-action action-reset" data-action="reset" type="button">Reset</button>
+          </div>
+
+          <nav class="bottom-nav" aria-label="Navigation principale">
+            <button class="nav-btn active" data-view="explore" type="button">Explorer</button>
+            <button class="nav-btn" data-view="favorites" type="button">Favoris</button>
+            <button class="nav-btn" data-view="team" type="button">Team</button>
+          </nav>
         </main>
 
-        <!-- Modal pour les détails -->
-        <div id="pokemonModal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <div class="modal-body" id="modalBody">
-                    <!-- Contenu dynamique -->
-                </div>
-            </div>
-        </div>
+        <div class="detail-overlay hidden" id="detailOverlay"></div>
+        <aside class="detail-sheet" id="detailSheet" aria-hidden="true">
+          <button class="close-sheet" id="closeDetail" aria-label="Fermer les details">Fermer</button>
+          <div class="detail-content" id="detailContent"></div>
+        </aside>
+      </article>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <template id="cardTemplate">
+      <article class="poke-card">
+        <div class="media-wrap">
+          <img class="poke-image" alt="" loading="lazy" decoding="async" />
+        </div>
+        <div class="badge-row">
+          <span class="id-badge"></span>
+          <button class="favorite-btn" type="button" aria-label="Ajouter aux favoris">Fav</button>
+        </div>
+        <h3 class="poke-name"></h3>
+        <p class="poke-subtitle"></p>
+        <div class="chip-row"></div>
+        <dl class="stat-grid">
+          <div>
+            <dt>Poids</dt>
+            <dd class="weight"></dd>
+          </div>
+          <div>
+            <dt>Taille</dt>
+            <dd class="height"></dd>
+          </div>
+          <div>
+            <dt>Categorie</dt>
+            <dd class="category"></dd>
+          </div>
+        </dl>
+        <div class="card-actions">
+          <button class="soft-btn details-btn" type="button">Details</button>
+          <button class="soft-btn team-btn" type="button">+ Team</button>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
 </html>
