@@ -120,8 +120,8 @@ function getViewLabel() {
   return state.view === "favorites"
     ? "Favoris"
     : state.view === "team"
-    ? "Team Builder"
-    : "Explorer";
+      ? "Team Builder"
+      : "Explorer";
 }
 
 function applyAccent(item) {

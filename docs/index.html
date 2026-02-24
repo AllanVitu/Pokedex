@@ -1,170 +1,183 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Pokedex Mobile</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div class="app-shell">
-      <aside class="desktop-hub" aria-label="Panneau desktop">
-        <section class="hub-card intro-card">
-          <p class="hub-kicker">Desktop layout</p>
-          <h2>Pokedex Control Center</h2>
-          <p>
-            Experience large screen: navigation rapide, stats live et raccourcis clavier.
-            Le rendu iPhone reste prioritaire sur mobile iOS.
-          </p>
-        </section>
 
-        <section class="hub-card stats-card">
-          <h3>Live Stats</h3>
-          <div class="metric-grid">
-            <article>
-              <p>Total</p>
-              <strong id="desktopTotal">0</strong>
-            </article>
-            <article>
-              <p>Visible</p>
-              <strong id="desktopVisible">0</strong>
-            </article>
-            <article>
-              <p>Favoris</p>
-              <strong id="desktopFav">0</strong>
-            </article>
-            <article>
-              <p>Team</p>
-              <strong id="desktopTeam">0</strong>
-            </article>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pokedex Mobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="desktop-hub" aria-label="Panneau desktop">
+      <section class="hub-card intro-card">
+        <p class="hub-kicker">Prompt Lab</p>
+        <h2>Generate Board</h2>
+        <div class="preview-strip" aria-hidden="true">
+          <figure class="preview-card">
+            <img src="./assets/imgs/Vogsral_mobile_optimized.webp" alt="" loading="lazy" />
+          </figure>
+          <figure class="preview-card">
+            <img src="./assets/imgs/Juracron_mobile_optimized.webp" alt="" loading="lazy" />
+          </figure>
+          <figure class="preview-card">
+            <img src="./assets/imgs/Belforion_mobile_optimized.webp" alt="" loading="lazy" />
+          </figure>
+        </div>
+        <label class="prompt-field">
+          Prompt:
+          <input
+            type="text"
+            value="Image de creature pokemon en style carte avec details fantasy."
+            readonly
+          />
+        </label>
+        <button class="generate-demo" type="button">GENERATE</button>
+      </section>
+
+      <section class="hub-card stats-card">
+        <h3>Live Stats</h3>
+        <div class="metric-grid">
+          <article>
+            <p>Total</p>
+            <strong id="desktopTotal">0</strong>
+          </article>
+          <article>
+            <p>Visible</p>
+            <strong id="desktopVisible">0</strong>
+          </article>
+          <article>
+            <p>Favoris</p>
+            <strong id="desktopFav">0</strong>
+          </article>
+          <article>
+            <p>Team</p>
+            <strong id="desktopTeam">0</strong>
+          </article>
+        </div>
+        <p class="view-tag">
+          Vue active:
+          <span id="desktopView">Explorer</span>
+        </p>
+      </section>
+
+      <section class="hub-card shortcuts-card">
+        <h3>Raccourcis</h3>
+        <ul class="shortcut-list">
+          <li><kbd>/</kbd> Focus recherche</li>
+          <li><kbd>1</kbd> Explorer</li>
+          <li><kbd>2</kbd> Favoris</li>
+          <li><kbd>3</kbd> Team</li>
+          <li><kbd>R</kbd> Random detail</li>
+        </ul>
+      </section>
+    </aside>
+
+    <article class="iphone16" id="iphone16">
+      <div class="status-strip">
+        <span>9:41</span>
+        <div class="status-icons">
+          <span aria-hidden="true">LTE</span>
+          <span aria-hidden="true">WiFi</span>
+          <span aria-hidden="true">Bat</span>
+        </div>
+      </div>
+      <div class="dynamic-island" aria-hidden="true"></div>
+
+      <main class="screen" id="screen">
+        <header class="app-header">
+          <div>
+            <p class="kicker">Pokemon Studio</p>
+            <h1>Generate your <span>custom</span> Pokedex</h1>
           </div>
-          <p class="view-tag">
-            Vue active:
-            <span id="desktopView">Explorer</span>
-          </p>
+          <button class="icon-btn" id="menuToggle" aria-label="Ouvrir le menu d'actions">
+            <span></span><span></span><span></span>
+          </button>
+        </header>
+
+        <section class="search-panel">
+          <label class="search-input-wrap">
+            <span class="search-icon">Q</span>
+            <input id="searchInput" type="search" placeholder="Rechercher un pokemon ou un type" autocomplete="off" />
+          </label>
+          <button id="quickRandom" class="soft-btn" type="button">Aleatoire</button>
         </section>
 
-        <section class="hub-card shortcuts-card">
-          <h3>Raccourcis</h3>
-          <ul class="shortcut-list">
-            <li><kbd>/</kbd> Focus recherche</li>
-            <li><kbd>1</kbd> Explorer</li>
-            <li><kbd>2</kbd> Favoris</li>
-            <li><kbd>3</kbd> Team</li>
-            <li><kbd>R</kbd> Random detail</li>
-          </ul>
+        <section class="types-row" id="typeFilters" aria-label="Filtres par type"></section>
+
+        <section class="content-head">
+          <h2 id="viewTitle">Explorer</h2>
+          <p id="resultCount">0 entrees</p>
         </section>
+
+        <section class="deck" id="deck" aria-live="polite"></section>
+
+        <section class="empty-state hidden" id="emptyState">
+          <h3>Aucun resultat</h3>
+          <p>Essaie un autre filtre ou reinitialise la recherche.</p>
+        </section>
+
+        <div class="radial-menu" id="radialMenu" aria-hidden="true">
+          <button class="radial-action action-random" data-action="random" type="button">Random</button>
+          <button class="radial-action action-team" data-action="autoteam" type="button">Auto Team</button>
+          <button class="radial-action action-reset" data-action="reset" type="button">Reset</button>
+        </div>
+
+        <nav class="bottom-nav" aria-label="Navigation principale">
+          <button class="nav-btn active" data-view="explore" type="button">Explorer</button>
+          <button class="nav-btn" data-view="favorites" type="button">Favoris</button>
+          <button class="nav-btn" data-view="team" type="button">Team</button>
+        </nav>
+      </main>
+
+      <div class="detail-overlay hidden" id="detailOverlay"></div>
+      <aside class="detail-sheet" id="detailSheet" aria-hidden="true">
+        <button class="close-sheet" id="closeDetail" aria-label="Fermer les details">Fermer</button>
+        <div class="detail-content" id="detailContent"></div>
       </aside>
+    </article>
+  </div>
 
-      <article class="iphone16" id="iphone16">
-        <div class="status-strip">
-          <span>9:41</span>
-          <div class="status-icons">
-            <span aria-hidden="true">LTE</span>
-            <span aria-hidden="true">WiFi</span>
-            <span aria-hidden="true">Bat</span>
-          </div>
+  <template id="cardTemplate">
+    <article class="poke-card">
+      <div class="media-wrap">
+        <img class="poke-image" alt="" loading="lazy" decoding="async" />
+      </div>
+      <div class="badge-row">
+        <span class="id-badge"></span>
+        <button class="favorite-btn" type="button" aria-label="Ajouter aux favoris">Fav</button>
+      </div>
+      <h3 class="poke-name"></h3>
+      <p class="poke-subtitle"></p>
+      <div class="chip-row"></div>
+      <dl class="stat-grid">
+        <div>
+          <dt>Poids</dt>
+          <dd class="weight"></dd>
         </div>
-        <div class="dynamic-island" aria-hidden="true"></div>
-
-        <main class="screen" id="screen">
-          <header class="app-header">
-            <div>
-              <p class="kicker">Edition mobile</p>
-              <h1>Pokedex Mythique</h1>
-            </div>
-            <button class="icon-btn" id="menuToggle" aria-label="Ouvrir le menu d'actions">
-              <span></span><span></span><span></span>
-            </button>
-          </header>
-
-          <section class="search-panel">
-            <label class="search-input-wrap">
-              <span class="search-icon">Q</span>
-              <input
-                id="searchInput"
-                type="search"
-                placeholder="Rechercher un pokemon ou un type"
-                autocomplete="off"
-              />
-            </label>
-            <button id="quickRandom" class="soft-btn" type="button">Aleatoire</button>
-          </section>
-
-          <section class="types-row" id="typeFilters" aria-label="Filtres par type"></section>
-
-          <section class="content-head">
-            <h2 id="viewTitle">Explorer</h2>
-            <p id="resultCount">0 entrees</p>
-          </section>
-
-          <section class="deck" id="deck" aria-live="polite"></section>
-
-          <section class="empty-state hidden" id="emptyState">
-            <h3>Aucun resultat</h3>
-            <p>Essaie un autre filtre ou reinitialise la recherche.</p>
-          </section>
-
-          <div class="radial-menu" id="radialMenu" aria-hidden="true">
-            <button class="radial-action action-random" data-action="random" type="button">Random</button>
-            <button class="radial-action action-team" data-action="autoteam" type="button">Auto Team</button>
-            <button class="radial-action action-reset" data-action="reset" type="button">Reset</button>
-          </div>
-
-          <nav class="bottom-nav" aria-label="Navigation principale">
-            <button class="nav-btn active" data-view="explore" type="button">Explorer</button>
-            <button class="nav-btn" data-view="favorites" type="button">Favoris</button>
-            <button class="nav-btn" data-view="team" type="button">Team</button>
-          </nav>
-        </main>
-
-        <div class="detail-overlay hidden" id="detailOverlay"></div>
-        <aside class="detail-sheet" id="detailSheet" aria-hidden="true">
-          <button class="close-sheet" id="closeDetail" aria-label="Fermer les details">Fermer</button>
-          <div class="detail-content" id="detailContent"></div>
-        </aside>
-      </article>
-    </div>
-
-    <template id="cardTemplate">
-      <article class="poke-card">
-        <div class="media-wrap">
-          <img class="poke-image" alt="" loading="lazy" decoding="async" />
+        <div>
+          <dt>Taille</dt>
+          <dd class="height"></dd>
         </div>
-        <div class="badge-row">
-          <span class="id-badge"></span>
-          <button class="favorite-btn" type="button" aria-label="Ajouter aux favoris">Fav</button>
+        <div>
+          <dt>Categorie</dt>
+          <dd class="category"></dd>
         </div>
-        <h3 class="poke-name"></h3>
-        <p class="poke-subtitle"></p>
-        <div class="chip-row"></div>
-        <dl class="stat-grid">
-          <div>
-            <dt>Poids</dt>
-            <dd class="weight"></dd>
-          </div>
-          <div>
-            <dt>Taille</dt>
-            <dd class="height"></dd>
-          </div>
-          <div>
-            <dt>Categorie</dt>
-            <dd class="category"></dd>
-          </div>
-        </dl>
-        <div class="card-actions">
-          <button class="soft-btn details-btn" type="button">Details</button>
-          <button class="soft-btn team-btn" type="button">+ Team</button>
-        </div>
-      </article>
-    </template>
+      </dl>
+      <div class="card-actions">
+        <button class="soft-btn details-btn" type="button">Details</button>
+        <button class="soft-btn team-btn" type="button">+ Team</button>
+      </div>
+    </article>
+  </template>
 
-    <script type="module" src="./app.js"></script>
-  </body>
+  <script type="module" src="./app.js"></script>
+</body>
+
 </html>
