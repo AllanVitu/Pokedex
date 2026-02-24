@@ -14,6 +14,54 @@
   </head>
   <body>
     <div class="app-shell">
+      <aside class="desktop-hub" aria-label="Panneau desktop">
+        <section class="hub-card intro-card">
+          <p class="hub-kicker">Desktop layout</p>
+          <h2>Pokedex Control Center</h2>
+          <p>
+            Experience large screen: navigation rapide, stats live et raccourcis clavier.
+            Le rendu iPhone reste prioritaire sur mobile iOS.
+          </p>
+        </section>
+
+        <section class="hub-card stats-card">
+          <h3>Live Stats</h3>
+          <div class="metric-grid">
+            <article>
+              <p>Total</p>
+              <strong id="desktopTotal">0</strong>
+            </article>
+            <article>
+              <p>Visible</p>
+              <strong id="desktopVisible">0</strong>
+            </article>
+            <article>
+              <p>Favoris</p>
+              <strong id="desktopFav">0</strong>
+            </article>
+            <article>
+              <p>Team</p>
+              <strong id="desktopTeam">0</strong>
+            </article>
+          </div>
+          <p class="view-tag">
+            Vue active:
+            <span id="desktopView">Explorer</span>
+          </p>
+        </section>
+
+        <section class="hub-card shortcuts-card">
+          <h3>Raccourcis</h3>
+          <ul class="shortcut-list">
+            <li><kbd>/</kbd> Focus recherche</li>
+            <li><kbd>1</kbd> Explorer</li>
+            <li><kbd>2</kbd> Favoris</li>
+            <li><kbd>3</kbd> Team</li>
+            <li><kbd>R</kbd> Random detail</li>
+          </ul>
+        </section>
+      </aside>
+
       <article class="iphone16" id="iphone16">
         <div class="status-strip">
           <span>9:41</span>

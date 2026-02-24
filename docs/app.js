@@ -1,11 +1,10 @@
-const pokedex = [
+const allPokemon = [
   {
     id: "001",
     name: "Juracron",
-    image: "./assets/imgs/JURACRON.png",
+    image: "./assets/imgs/Juracron_mobile_optimized.webp",
     accent: "#b6dde0",
-    gradient:
-      "linear-gradient(152deg, #d8eff0 0%, #b4dce0 44%, #d4ecf0 100%)",
+    gradient: "linear-gradient(152deg, #d8eff0 0%, #b4dce0 44%, #d4ecf0 100%)",
     types: ["Grass", "Water", "Rock"],
     rarity: "Legendaire",
     weight: "450 kg",
@@ -19,10 +18,9 @@ const pokedex = [
   {
     id: "090",
     name: "Belforion",
-    image: "./assets/imgs/Belforion.png",
+    image: "./assets/imgs/Belforion_mobile_optimized.webp",
     accent: "#f1c58e",
-    gradient:
-      "linear-gradient(152deg, #f8d7a8 0%, #f3c381 43%, #f7dcba 100%)",
+    gradient: "linear-gradient(152deg, #f8d7a8 0%, #f3c381 43%, #f7dcba 100%)",
     types: ["Fire", "Rock"],
     rarity: "Mythique",
     weight: "310 kg",
@@ -36,10 +34,9 @@ const pokedex = [
   {
     id: "165",
     name: "Vogsral",
-    image: "./assets/imgs/Vogsral.png",
+    image: "./assets/imgs/Vogsral_mobile_optimized.webp",
     accent: "#b8d9b2",
-    gradient:
-      "linear-gradient(152deg, #d5e9d2 0%, #badab5 43%, #dff0dd 100%)",
+    gradient: "linear-gradient(152deg, #d5e9d2 0%, #badab5 43%, #dff0dd 100%)",
     types: ["Grass", "Psychic"],
     rarity: "Rare",
     weight: "310 kg",
@@ -51,6 +48,11 @@ const pokedex = [
     talents: ["Brume Envoutante", "Souffle des Vosges", "Regard Sylvestre"],
   },
 ];
+
+const DEFAULT_ACCENT = "#87c39f";
+const DEFAULT_GRADIENT = "linear-gradient(150deg, #e8f0f5, #f3ece4 42%, #d9e8df)";
+
+let pokedex = [];
 
 const state = {
   query: "",
@@ -69,6 +71,8 @@ const refs = {
   typeFilters: document.querySelector("#typeFilters"),
   deck: document.querySelector("#deck"),
   emptyState: document.querySelector("#emptyState"),
+  emptyStateTitle: document.querySelector("#emptyState h3"),
+  emptyStateText: document.querySelector("#emptyState p"),
   viewTitle: document.querySelector("#viewTitle"),
   resultCount: document.querySelector("#resultCount"),
   cardTemplate: document.querySelector("#cardTemplate"),
@@ -79,20 +83,58 @@ const refs = {
   detailSheet: document.querySelector("#detailSheet"),
   detailContent: document.querySelector("#detailContent"),
   closeDetail: document.querySelector("#closeDetail"),
+  desktopTotal: document.querySelector("#desktopTotal"),
+  desktopVisible: document.querySelector("#desktopVisible"),
+  desktopFav: document.querySelector("#desktopFav"),
+  desktopTeam: document.querySelector("#desktopTeam"),
+  desktopView: document.querySelector("#desktopView"),
 };
 
-const uniqueTypes = ["All", ...new Set(pokedex.flatMap((item) => item.types))];
-
 function escapeHtml(value) {
-  return value
+  return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 }
 
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
+
+function darken(hex, amount) {
+  const raw = hex.replace("#", "");
+  const normal = raw.length === 3 ? raw.split("").map((c) => c + c).join("") : raw;
+  const int = Number.parseInt(normal, 16);
+  const r = clamp(((int >> 16) & 0xff) - amount, 0, 255);
+  const g = clamp(((int >> 8) & 0xff) - amount, 0, 255);
+  const b = clamp((int & 0xff) - amount, 0, 255);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+function getUniqueTypes() {
+  return ["All", ...new Set(pokedex.flatMap((item) => item.types))];
+}
+
+function getViewLabel() {
+  return state.view === "favorites"
+    ? "Favoris"
+    : state.view === "team"
+    ? "Team Builder"
+    : "Explorer";
+}
+
+function applyAccent(item) {
+  const accent = item?.accent ?? DEFAULT_ACCENT;
+  const gradient = item?.gradient ?? DEFAULT_GRADIENT;
+  refs.root.style.setProperty("--accent", accent);
+  refs.root.style.setProperty("--accent-strong", darken(accent, 18));
+  refs.root.style.setProperty("--phone-bg", gradient);
+}
+
 function getDisplayList() {
   const query = state.query.trim().toLowerCase();
+
   const scoped = pokedex.filter((item) => {
     if (state.view === "favorites" && !state.favorites.has(item.id)) {
       return false;
@@ -124,50 +166,38 @@ function getDisplayList() {
 }
 
 function updateHeader(listLength) {
-  const title =
-    state.view === "favorites"
-      ? "Favoris"
-      : state.view === "team"
-      ? "Team Builder"
-      : "Explorer";
-  refs.viewTitle.textContent = title;
+  refs.viewTitle.textContent = getViewLabel();
   refs.resultCount.textContent = `${listLength} ${listLength > 1 ? "entrees" : "entree"}`;
 }
 
-function applyAccent(item) {
-  refs.root.style.setProperty("--accent", item.accent);
-  refs.root.style.setProperty("--accent-strong", darken(item.accent, 18));
-  refs.root.style.setProperty("--phone-bg", item.gradient);
+function updateDesktopStats(listLength) {
+  if (!refs.desktopTotal) {
+    return;
+  }
+
+  refs.desktopTotal.textContent = String(pokedex.length);
+  refs.desktopVisible.textContent = String(listLength);
+  refs.desktopFav.textContent = String(state.favorites.size);
+  refs.desktopTeam.textContent = String(state.team.size);
+  refs.desktopView.textContent = getViewLabel();
 }
 
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
-}
-
-function darken(hex, amount) {
-  const raw = hex.replace("#", "");
-  const normal = raw.length === 3 ? raw.split("").map((c) => c + c).join("") : raw;
-  const int = Number.parseInt(normal, 16);
-  const r = clamp(((int >> 16) & 0xff) - amount, 0, 255);
-  const g = clamp(((int >> 8) & 0xff) - amount, 0, 255);
-  const b = clamp((int & 0xff) - amount, 0, 255);
-  return `rgb(${r}, ${g}, ${b})`;
-}
-
-function renderTypeFilters() {
+function renderTypeFilters(types) {
   refs.typeFilters.innerHTML = "";
   const fragment = document.createDocumentFragment();
-  for (const type of uniqueTypes) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = `type-chip${state.type === type ? " active" : ""}`;
-    btn.textContent = type;
-    btn.addEventListener("click", () => {
+
+  for (const type of types) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `type-chip${state.type === type ? " active" : ""}`;
+    button.textContent = type;
+    button.addEventListener("click", () => {
       state.type = type;
       render();
     });
-    fragment.append(btn);
+    fragment.append(button);
   }
+
   refs.typeFilters.append(fragment);
 }
 
@@ -188,18 +218,53 @@ function toggleTeam(id) {
   state.team.add(id);
 }
 
+function createImageFallback(mediaWrap, item) {
+  if (mediaWrap.querySelector(".image-fallback")) {
+    return;
+  }
+
+  const fallback = document.createElement("div");
+  fallback.className = "image-fallback";
+  fallback.textContent = item.name.slice(0, 3).toUpperCase();
+  mediaWrap.append(fallback);
+}
+
+function bindCardImage(node, item) {
+  const mediaWrap = node.querySelector(".media-wrap");
+  const image = node.querySelector(".poke-image");
+
+  image.style.display = "block";
+
+  if (!item.image) {
+    image.removeAttribute("src");
+    image.alt = `${item.name} sans image`;
+    image.style.display = "none";
+    createImageFallback(mediaWrap, item);
+    return;
+  }
+
+  image.src = item.image;
+  image.alt = item.name;
+  image.addEventListener(
+    "error",
+    () => {
+      image.style.display = "none";
+      createImageFallback(mediaWrap, item);
+    },
+    { once: true },
+  );
+}
+
 function renderCards(items) {
   refs.deck.innerHTML = "";
-
   const fragment = document.createDocumentFragment();
+
   items.forEach((item, index) => {
     const node = refs.cardTemplate.content.firstElementChild.cloneNode(true);
     node.style.background = item.gradient;
     node.style.animationDelay = `${index * 45}ms`;
 
-    const image = node.querySelector(".poke-image");
-    image.src = item.image;
-    image.alt = item.name;
+    bindCardImage(node, item);
 
     node.querySelector(".id-badge").textContent = `#${item.id}`;
     node.querySelector(".poke-name").textContent = item.name;
@@ -222,6 +287,7 @@ function renderCards(items) {
       favoriteBtn.textContent = "Fav";
       favoriteBtn.setAttribute("aria-label", "Retirer des favoris");
     }
+
     favoriteBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       if (state.favorites.has(item.id)) {
@@ -257,20 +323,47 @@ function renderCards(items) {
   refs.deck.append(fragment);
 }
 
-function render() {
-  renderTypeFilters();
-  const items = getDisplayList();
-  updateHeader(items.length);
-
-  if (items.length === 0) {
-    refs.emptyState.classList.remove("hidden");
-    refs.deck.classList.add("hidden");
-  } else {
+function renderEmptyState(itemsLength) {
+  if (itemsLength > 0) {
     refs.emptyState.classList.add("hidden");
     refs.deck.classList.remove("hidden");
+    return;
+  }
+
+  refs.emptyState.classList.remove("hidden");
+  refs.deck.classList.add("hidden");
+
+  if (pokedex.length === 0) {
+    refs.emptyStateTitle.textContent = "Aucune carte disponible";
+    refs.emptyStateText.textContent =
+      "Ajoute des images dans docs/assets/imgs puis recharge la page.";
+    return;
+  }
+
+  refs.emptyStateTitle.textContent = "Aucun resultat";
+  refs.emptyStateText.textContent = "Essaie un autre filtre ou reinitialise la recherche.";
+}
+
+function render() {
+  const types = getUniqueTypes();
+  if (!types.includes(state.type)) {
+    state.type = "All";
+  }
+
+  renderTypeFilters(types);
+  const items = getDisplayList();
+
+  updateHeader(items.length);
+  updateDesktopStats(items.length);
+  renderEmptyState(items.length);
+
+  if (items.length > 0) {
     renderCards(items);
     applyAccent(items[0]);
+    return;
   }
+
+  applyAccent(pokedex[0]);
 }
 
 function renderDetail(item) {
@@ -323,6 +416,10 @@ function switchView(nextView) {
 }
 
 function pickRandom() {
+  if (pokedex.length === 0) {
+    return;
+  }
+
   const index = Math.floor(Math.random() * pokedex.length);
   const item = pokedex[index];
   applyAccent(item);
@@ -330,12 +427,17 @@ function pickRandom() {
 }
 
 function autoBuildTeam() {
+  if (pokedex.length === 0) {
+    return;
+  }
+
   const pool = [...pokedex];
   for (let i = pool.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  state.team = new Set(pool.slice(0, 3).map((item) => item.id));
+  const size = Math.min(3, pool.length);
+  state.team = new Set(pool.slice(0, size).map((item) => item.id));
   switchView("team");
 }
 
@@ -353,6 +455,18 @@ function toggleMenu(forceState) {
     state.menuOpen = !state.menuOpen;
   }
   refs.radialMenu.classList.toggle("open", state.menuOpen);
+}
+
+function isEditableTarget(target) {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  return (
+    target.tagName === "INPUT" ||
+    target.tagName === "TEXTAREA" ||
+    target.isContentEditable
+  );
 }
 
 function setupEvents() {
@@ -403,7 +517,113 @@ function setupEvents() {
       toggleMenu(false);
     }
   });
+
+  window.addEventListener("keydown", (event) => {
+    if (isEditableTarget(event.target) && event.key !== "Escape") {
+      return;
+    }
+
+    if (event.key === "/") {
+      event.preventDefault();
+      refs.searchInput.focus();
+      return;
+    }
+
+    if (event.key === "1") {
+      switchView("explore");
+      return;
+    }
+
+    if (event.key === "2") {
+      switchView("favorites");
+      return;
+    }
+
+    if (event.key === "3") {
+      switchView("team");
+      return;
+    }
+
+    if (event.key.toLowerCase() === "r") {
+      pickRandom();
+      return;
+    }
+
+    if (event.key === "Escape") {
+      closeDetail();
+      toggleMenu(false);
+    }
+  });
+}
+
+function syncStateWithData() {
+  const validIds = new Set(pokedex.map((item) => item.id));
+
+  state.favorites = new Set([...state.favorites].filter((id) => validIds.has(id)));
+
+  const nextTeam = [...state.team].filter((id) => validIds.has(id));
+  if (nextTeam.length === 0 && pokedex[0]) {
+    nextTeam.push(pokedex[0].id);
+  }
+  state.team = new Set(nextTeam.slice(0, 3));
+}
+
+function probeImage(src) {
+  return new Promise((resolve) => {
+    if (!src) {
+      resolve(false);
+      return;
+    }
+
+    const image = new Image();
+    const timeoutId = window.setTimeout(() => {
+      image.onload = null;
+      image.onerror = null;
+      resolve(false);
+    }, 2200);
+
+    image.onload = () => {
+      window.clearTimeout(timeoutId);
+      resolve(true);
+    };
+
+    image.onerror = () => {
+      window.clearTimeout(timeoutId);
+      resolve(false);
+    };
+
+    image.src = src;
+  });
+}
+
+async function buildPokedexFromAssets() {
+  const checks = await Promise.all(
+    allPokemon.map(async (item) => {
+      const available = await probeImage(item.image);
+      return { item, available };
+    }),
+  );
+
+  const availableEntries = checks
+    .filter((entry) => entry.available)
+    .map((entry) => entry.item);
+
+  if (availableEntries.length > 0) {
+    return availableEntries;
+  }
+
+  return allPokemon.map((item) => ({ ...item, image: "" }));
+}
+
+async function initApp() {
+  applyAccent();
+  updateHeader(0);
+  updateDesktopStats(0);
+
+  pokedex = await buildPokedexFromAssets();
+  syncStateWithData();
+  render();
 }
 
 setupEvents();
-render();
+initApp();
