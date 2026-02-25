@@ -1,169 +1,17 @@
-const allPokemon = [
-  {
-    id: "001",
-    name: "Juracron",
-    image: "./assets/imgs/Juracron_card.webp",
-    accent: "#b6dde0",
-    types: ["Nature", "Water", "Rock"],
-    rarity: "Legendary",
-    weight: "450 kg",
-    height: "3.0 m",
-    category: "Mountain Spirit",
-    habitat: "Jura",
-    summary:
-      "Guardian of the lakes, forests, and mountains. It seamlessly balances the elements of water and rock across the region.",
-    talents: ["Cascades Breath", "Mountain's Wrath", "Jura's Eternity"],
-  },
-  {
-    id: "090",
-    name: "Belforion",
-    image: "./assets/imgs/Belforion_card.webp",
-    accent: "#f1c58e",
-    types: ["Fire", "Rock"],
-    rarity: "Mythical",
-    weight: "310 kg",
-    height: "2.0 m",
-    category: "Bastion Lion",
-    habitat: "Belfort",
-    summary:
-      "Protector of the ancient ramparts and a symbol of courage. Its roar alone can set the very stones ablaze.",
-    talents: ["Triumphant Roar", "Bastion's Aegis", "Flaming Guard"],
-  },
-  {
-    id: "165",
-    name: "Vogsrâl",
-    image: "./assets/imgs/Vogsrâl_card.webp",
-    accent: "#b8d9b2",
-    types: ["Nature", "Mystic"],
-    rarity: "Rare",
-    weight: "310 kg",
-    height: "1.6 m",
-    category: "Mist Stag",
-    habitat: "Vosges",
-    summary:
-      "The spirit of the Vosges. It watches over the deep forests and guides lost travelers through the dense morning mist.",
-    talents: ["Enchanting Mist", "Vosges' Breath", "Sylvan Gaze"],
-  },
-  {
-    id: "067",
-    name: "Alsace",
-    image: "./assets/imgs/Alsace_card.webp",
-    accent: "#f4a261",
-    types: ["Heritage", "Gastronomy"],
-    rarity: "Epic",
-    weight: "Unknown",
-    height: "Vast",
-    category: "Historical Realm",
-    habitat: "Eastern Border",
-    summary:
-      "A region characterized by its picturesque villages and rich culinary heritage. It breathes history and tradition.",
-    talents: ["Stork's Blessing", "Pretzel Shield", "Vineyard Aura"],
-  },
-  {
-    id: "029",
-    name: "Bretagne",
-    image: "./assets/imgs/Bretagne_card.webp",
-    accent: "#457b9d",
-    types: ["Ocean", "Legend"],
-    rarity: "Epic",
-    weight: "Oceanic",
-    height: "Coastal",
-    category: "Maritime Land",
-    habitat: "Western Peninsula",
-    summary:
-      "A land forged by the sea and ancient Celtic legends. Its stormy coasts hide secrets of times long past.",
-    talents: ["Ocean's Roar", "Granite Will", "Celtic Magic"],
-  },
-  {
-    id: "034",
-    name: "Espagne",
-    image: "./assets/imgs/Espagne_card.webp",
-    accent: "#e9c46a",
-    types: ["Sun", "Passion"],
-    rarity: "Legendary",
-    weight: "Continental",
-    height: "Vast",
-    category: "Southern Kingdom",
-    habitat: "Iberian Peninsula",
-    summary:
-      "A sun-drenched land of passion, history, and vibrant cultures. It radiates a warm, unyielding energy.",
-    talents: ["Solar Flare", "Flamenco Rhythm", "Tapas Feast"],
-  },
-  {
-    id: "075",
-    name: "Île-de-France",
-    image: "./assets/imgs/Ile_de_France_card.webp",
-    accent: "#1d3557",
-    types: ["Urban", "Culture"],
-    rarity: "Epic",
-    weight: "Dense",
-    height: "Monumental",
-    category: "Metropolitan Core",
-    habitat: "Central Basin",
-    summary:
-      "The bustling heart of the country, radiating culture, power, and architectural wonders. It never sleeps.",
-    talents: ["City Lights", "Metro Network", "Architect's Vision"],
-  },
-  {
-    id: "039",
-    name: "Italie",
-    image: "./assets/imgs/Italie_card.webp",
-    accent: "#2a9d8f",
-    types: ["Art", "History"],
-    rarity: "Legendary",
-    weight: "Peninsular",
-    height: "Alpine to Coastal",
-    category: "Ancient Empire",
-    habitat: "Mediterranean",
-    summary:
-      "A majestic long land bridging Europe and the sea, overflowing with timeless art, history, and romance.",
-    talents: ["Renaissance Masterpiece", "Colosseum Echo", "Dolce Vita"],
-  },
-  {
-    id: "064",
-    name: "Pays Basque",
-    image: "./assets/imgs/Pays_Basque_card.webp",
-    accent: "#e76f51",
-    types: ["Tradition", "Ocean"],
-    rarity: "Rare",
-    weight: "Rugged",
-    height: "Mountainous",
-    category: "Proud Domain",
-    habitat: "Pyrenees & Coast",
-    summary:
-      "A proud and ancient region nestled between the mountains and the ocean, preserving an enigmatic culture.",
-    talents: ["Oceanic Surf", "Mountain Echo", "Espelette Spice"],
-  },
-  {
-    id: "035",
-    name: "Portugal",
-    image: "./assets/imgs/Portugal_card.webp",
-    accent: "#8ecae6",
-    types: ["Ocean", "Discovery"],
-    rarity: "Legendary",
-    weight: "Continental",
-    height: "Coastal",
-    category: "Explorer's Land",
-    habitat: "Western Edge",
-    summary:
-      "A coastal nation of explorers and beautiful tiled streets, forever gazing out into the vast Atlantic.",
-    talents: ["Atlantic Breeze", "Explorer's Compass", "Golden Tile"],
-  }
-];
+import { buildPokedexFromAssets } from "./data.js";
+import {
+  state,
+  subscribe,
+  persistState,
+  hydrateStateFromStorage,
+  syncViewWithHash,
+  navigateTo,
+  getUniqueTypes,
+  getDisplayList,
+  DEFAULT_ACCENT,
+} from "./store.js";
 
-const DEFAULT_ACCENT = "#B8D9B2";
-const STORAGE_KEY = "pokedex_studio_v2";
 const TOAST_DURATION = 2500;
-
-let pokedex = [];
-
-const state = {
-  query: "",
-  type: "All",
-  view: "explore",
-  favorites: new Set(["001"]),
-  team: new Set(["001", "090"]),
-};
 
 const refs = {
   root: document.documentElement,
@@ -185,32 +33,6 @@ const refs = {
   toastHost: document.querySelector("#toastHost"),
 };
 
-function persistState() {
-  try {
-    const payload = {
-      query: state.query,
-      type: state.type,
-      view: state.view,
-      favorites: [...state.favorites],
-      team: [...state.team],
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-  } catch { }
-}
-
-function hydrateStateFromStorage() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return;
-    const parsed = JSON.parse(raw);
-    if (typeof parsed.query === "string") state.query = parsed.query;
-    if (typeof parsed.type === "string") state.type = parsed.type;
-    if (["explore", "favorites", "team"].includes(parsed.view)) state.view = parsed.view;
-    if (Array.isArray(parsed.favorites)) state.favorites = new Set(parsed.favorites.map(String));
-    if (Array.isArray(parsed.team)) state.team = new Set(parsed.team.map(String));
-  } catch { }
-}
-
 function showToast(message) {
   if (!refs.toastHost) return;
   const toast = document.createElement("div");
@@ -223,10 +45,6 @@ function showToast(message) {
   }, TOAST_DURATION);
 }
 
-function getUniqueTypes() {
-  return ["All", ...new Set(pokedex.flatMap((item) => item.types))];
-}
-
 function getViewLabel() {
   if (state.view === "favorites") return "Favorites";
   if (state.view === "team") return "Dream Team";
@@ -236,26 +54,6 @@ function getViewLabel() {
 function applyAccent(item) {
   const accent = item?.accent ?? DEFAULT_ACCENT;
   refs.root.style.setProperty("--accent", accent);
-}
-
-function getDisplayList() {
-  const query = state.query.trim().toLowerCase();
-  const scoped = pokedex.filter((item) => {
-    if (state.view === "favorites" && !state.favorites.has(item.id)) return false;
-    if (state.view === "team" && !state.team.has(item.id)) return false;
-    return true;
-  });
-
-  return scoped.filter((item) => {
-    const passesType = state.type === "All" || item.types.includes(state.type);
-    if (!passesType) return false;
-    if (!query) return true;
-    return (
-      item.name.toLowerCase().includes(query) ||
-      item.types.some((type) => type.toLowerCase().includes(query)) ||
-      item.category.toLowerCase().includes(query)
-    );
-  });
 }
 
 function updateHeader(listLength) {
@@ -331,7 +129,6 @@ function renderCards(items) {
     const node = refs.cardTemplate.content.firstElementChild.cloneNode(true);
     node.style.animationDelay = `${index * 40}ms`;
 
-    // Apply specific accent color to the card glow
     const glow = node.querySelector(".card-bg-glow");
     if (glow && item.accent) {
       glow.style.background = item.accent;
@@ -366,7 +163,7 @@ function renderCards(items) {
         showToast(`${item.name} added to favorites`);
       }
       persistState();
-      // Only re-render if we are in the favorites view to avoid full re-paints
+      // Re-render only if we are in favorites view to remove it immediately safely
       if (state.view === "favorites") render();
     });
 
@@ -480,17 +277,10 @@ function closeDetail() {
   document.body.style.overflow = "";
 }
 
-function switchView(nextView) {
-  state.view = nextView;
-  syncNavButtons();
-  persistState();
-  render();
-}
-
 function pickRandom() {
-  if (pokedex.length === 0) return;
-  const index = Math.floor(Math.random() * pokedex.length);
-  const item = pokedex[index];
+  if (state.pokedex.length === 0) return;
+  const index = Math.floor(Math.random() * state.pokedex.length);
+  const item = state.pokedex[index];
   applyAccent(item);
   openDetail(item);
 }
@@ -515,7 +305,9 @@ function setupEvents() {
   refs.resetBtn.addEventListener("click", resetFilters);
 
   refs.navButtons.forEach((btn) => {
-    btn.addEventListener("click", () => switchView(btn.dataset.view));
+    btn.addEventListener("click", () => {
+      navigateTo(btn.dataset.view); // Updates hash which triggers syncViewWithHash
+    });
   });
 
   refs.closeDetail.addEventListener("click", closeDetail);
@@ -523,6 +315,10 @@ function setupEvents() {
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeDetail();
+  });
+
+  window.addEventListener("hashchange", () => {
+    syncViewWithHash();
   });
 }
 
@@ -539,24 +335,17 @@ function probeImage(src) {
   });
 }
 
-async function buildPokedexFromAssets() {
-  const checks = await Promise.all(
-    allPokemon.map(async (item) => {
-      const available = await probeImage(item.image);
-      return { item, available };
-    })
-  );
-  const available = checks.filter(c => c.available).map(c => c.item);
-  return available.length > 0 ? available : allPokemon.map(i => ({ ...i, image: "" }));
-}
-
 async function initApp() {
   applyAccent();
-  pokedex = await buildPokedexFromAssets();
+  state.pokedex = await buildPokedexFromAssets(probeImage);
+
   hydrateStateFromStorage();
+  syncViewWithHash();
+
+  subscribe(render);
 
   // Clean invalid favorites/team due to pokedex changes
-  const validIds = new Set(pokedex.map(i => i.id));
+  const validIds = new Set(state.pokedex.map(i => i.id));
   state.favorites = new Set([...state.favorites].filter(id => validIds.has(id)));
   state.team = new Set([...state.team].filter(id => validIds.has(id)));
 

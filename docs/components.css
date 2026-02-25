@@ -1,0 +1,351 @@
+/* Form & Search Components */
+.search-panel {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  z-index: 10;
+}
+
+.search-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-full);
+  padding: 0 24px;
+  height: 56px;
+  transition:
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+}
+
+.search-input-wrap:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.search-input-wrap input {
+  flex: 1;
+  height: 100%;
+  outline: none;
+  font-weight: 500;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.search-input-wrap input::placeholder {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.search-icon {
+  color: var(--muted);
+}
+
+/* Buttons */
+.soft-btn {
+  height: 56px;
+  width: 56px;
+  display: grid;
+  place-items: center;
+  background: var(--bg-input);
+  border: 1px solid var(--stroke);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    background var(--transition-smooth),
+    border-color var(--transition-smooth),
+    color var(--transition-smooth);
+}
+
+.soft-btn:hover {
+  background: var(--stroke);
+  color: var(--accent);
+}
+
+.primary-btn {
+  padding: 14px 32px;
+  background: var(--ink);
+  color: var(--bg-page);
+  border-radius: var(--radius-full);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform var(--transition-smooth),
+    opacity var(--transition-smooth);
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* Main Navigation */
+.main-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  background: var(--bg-card);
+  padding: 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--stroke);
+}
+
+.nav-btn {
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all var(--transition-smooth);
+}
+
+.nav-btn:hover {
+  color: var(--ink);
+}
+
+.nav-btn.active {
+  background: var(--stroke);
+  color: var(--ink);
+}
+
+/* Chip Filters */
+.types-row {
+  display: flex;
+  gap: 8px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.types-row::-webkit-scrollbar {
+  display: none;
+}
+
+.type-chip {
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--stroke);
+  background: var(--bg-input);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-smooth);
+}
+
+.type-chip:hover {
+  background: var(--stroke);
+}
+
+.type-chip.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg-page);
+}
+
+/* Bento Card Design */
+.poke-card {
+  background: var(--bg-card);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  cursor: pointer;
+  transition:
+    transform var(--transition-smooth),
+    border-color var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.poke-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--stroke-strong);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.card-image-container {
+  width: 100%;
+  aspect-ratio: 1/1; /* Square for cleaner bento look */
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-bg-glow {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  opacity: 0.05;
+  transition: opacity var(--transition-smooth);
+}
+
+.poke-card:hover .card-bg-glow {
+  opacity: 0.15;
+}
+
+.poke-image {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  transition: transform var(--transition-smooth);
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
+.poke-card:hover .poke-image {
+  transform: scale(1.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.id-badge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    transform var(--transition-smooth),
+    color var(--transition-smooth);
+  color: var(--muted);
+}
+
+.icon-btn:hover {
+  transform: scale(1.1);
+  color: var(--ink);
+}
+
+.icon-btn.active {
+  color: #fb7185; /* Soft vibrant red */
+}
+
+.icon-btn.active .heart-icon {
+  fill: currentColor;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.poke-subtitle {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.poke-name {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag-chip {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  border: 1px solid var(--stroke);
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Toast Notifications */
+.toast-host {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--ink);
+  color: var(--bg-page);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: toast-in 300ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.toast.out {
+  animation: toast-out 250ms ease forwards;
+}
+
+@keyframes toast-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 768px) {
+  .search-panel {
+    flex-direction: column;
+  }
+  .search-input-wrap,
+  .soft-btn {
+    width: 100%;
+  }
+  .soft-btn {
+    border-radius: var(--radius-full);
+  }
+  .main-nav {
+    overflow-x: auto;
+    width: 100%;
+  }
+  .nav-btn {
+    white-space: nowrap;
+  }
+}

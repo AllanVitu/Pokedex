@@ -1,0 +1,89 @@
+/* Layout Containers */
+.app-container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 4vw 6vw;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Header Section Layout */
+.grand-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main Content Layout */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.content-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--stroke);
+}
+
+#resultCount {
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Grid Layout for Cards (Bento) */
+.deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  /* Bento boxes usually have structured dense packing, simple CSS grid does well here */
+  align-items: start;
+}
+
+/* Empty State Layout */
+.empty-state {
+  text-align: center;
+  padding: 8rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.empty-state p {
+  color: var(--muted);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 6vw 4vw;
+    gap: 2rem;
+  }
+
+  .content-head {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .deck {
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
